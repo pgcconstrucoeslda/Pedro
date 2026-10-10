@@ -26,7 +26,7 @@ STOP = set("""a o os as de da do das dos e em no na nos nas com sem por para ao 
 ou incl incluindo inclui incluido fornecimento fornecer execucao executar aplicacao aplicar todos todas
 trabalhos trabalho necessarios necessario conforme pecas desenhadas desenhado projeto tipo equivalente
 etc ate sobre sob entre cada outro outros outras outra este esta estes estas seu sua seus suas pelo pela
-respetivo respetiva respetivos devidamente acordo forma demais materiais material acessorios""".split())
+respetivo respetiva respetivos devidamente acordo forma demais materiais material acessorios verba""".split())
 
 UNIDADES = {"m2": "m2", "m²": "m2", "m3": "m3", "m³": "m3", "ml": "m", "m.l.": "m", "m": "m", "mts": "m",
             "un": "un", "un.": "un", "und": "un", "uni": "un", "unid": "un", "u": "un", "pç": "un", "pc": "un",
@@ -69,19 +69,24 @@ BORDA = Border(left=thin, right=thin, top=thin, bottom=thin)
 
 
 def norm(txt):
+    txt = str(txt or "").replace("Ø", " d").replace("ø", " d")   # o «Ø» perde-se na normalização ASCII
     txt = unicodedata.normalize("NFKD", str(txt or "")).encode("ascii", "ignore").decode().lower()
     return re.sub(r"\s+", " ", txt)
 
 
 def tokens(txt):
     out = []
-    for t in re.findall(r"[a-z]+|\d+(?:[.,]\d+)?", norm(txt)):
-        if t in STOP or (len(t) < 3 and not t.isdigit()):
-            continue
+    for t in re.findall(r"[a-z]+\d+[a-z\d]*|[a-z]+|\d+(?:[.,]\d+)?", norm(txt)):
+        if t in STOP or (len(t) < 3 and not t[0].isdigit()) or (t.isdigit() and len(t) == 1):
+            continue   # códigos como «ba13», «c25» ficam inteiros; números de 1 dígito são ambíguos (8 mm vs 8 cm)
         if not t[0].isdigit() and len(t) > 4 and t.endswith("s"):
             t = t[:-1]                      # plural simples: paredes → parede, tetos → teto
-        out.append(t[:6] if not t[0].isdigit() else t)
+        out.append(t[:6] if t.isalpha() else t)
     return out
+
+
+def diametros(txt):
+    return set(re.findall(r"(?:\bd|ø|diametro)\s?(\d{2,3})\b", norm(txt)))
 
 
 def unidade(u):
@@ -255,16 +260,22 @@ def melhor_preco(item, base, idf):
         score = 0.75 * cobertura_base + 0.25 * min(1.0, cobertura_art * 2)
         if un_a and b["un"] and un_a != b["un"]:
             score *= 0.5
-        if bool(set(inicio_a) & DEMOLICAO) != bool(set(tokens(b["desc"])[:3]) & DEMOLICAO):   # natureza lê-se no verbo inicial
+        dia_a, dia_b = diametros(item["desc"]), diametros(b["desc"])
+        if dia_a and dia_b and not (dia_a & dia_b):   # diâmetros diferentes (ex.: Ø90 vs D110)
+            score *= 0.6
+        if bool(set(inicio_a[:3]) & DEMOLICAO) != bool(set(tokens(b["desc"])[:3]) & DEMOLICAO):   # natureza lê-se no verbo inicial
             score *= 0.5
         tit = set(tokens(re.sub(r"^\s*[A-Za-z]{1,3}\.?\d+\s*\|", "", item.get("titulo", ""))))
         if tit and not (tit & b["tok"]):          # o título do artigo (ex.: «REGULARIZAÇÃO») tem de estar na base
             score *= 0.6
+        if inicio_a and inicio_a[0] not in b["tok"] and inicio_a[0] not in ELEMENTOS:
+            score *= 0.75                         # o trabalho principal do artigo (1.ª palavra útil) não está na base
         el_a, el_b = tok_a & ELEMENTOS, b["tok"] & ELEMENTOS
         if el_a and el_b and not (el_a & el_b):   # elemento construtivo diferente (ex.: parede vs pavimento)
             score *= 0.6
-        res.append((round(score, 3), b))
-    res.sort(key=lambda x: (-x[0], x[1]["fiab"] or "Z"))
+        res.append((round(score, 3), b, w(comuns)))
+    res.sort(key=lambda x: (-x[0], -x[2], x[1]["fiab"] or "Z"))   # empate: ganha quem cobre mais do artigo
+    res = [(sc, b) for sc, b, _ in res]
     return res[:3]
 
 

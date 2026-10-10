@@ -1,0 +1,16 @@
+ITED|Tubo isogris Ø25 (JSL ou equivalente)|m|1.30
+ITED|Tubo PEAD corrugado Ø40|m|1.70
+ITED|Caixa de aparelhagem funda I1|un|1.00
+ITED|Armário ATE INF completo (RG-PC, RG-CC, RG-FO)|un|870
+ITED|CVM equipada com tampa (Telecomunicações)|un|125
+ITED|Cabo U/UTP Cat6 LSZH|m|0.80
+ITED|Cabo coaxial interior TCD-C|m|1.00
+ITED|Cabo coaxial exterior (antena-ATE)|m|1.00
+ITED|Cabo de fibra óptica 2 fibras G.657A|m|4.60
+ITED|ATI rack 6PC+6CC+2FO equipado|un|355
+ITED|Tomada RJ45 Cat6|un|18
+ITED|Tomada coaxial TV|un|21
+ITED|Tomada de fibra óptica com 2 saídas SC/APC|un|32
+ITED|Sistema de antenas TDT: antena, mastro, descarregador de sobretensões e cabeça de rede|vg|1254
+ITED|Rede de terras da ITED|vg|168
+ITED|Ensaios, relatório REF e certificação ITED|vg|250

@@ -32,6 +32,13 @@ for l in open(f"{sp}/base_ribeira.txt", encoding="utf-8"):
     pre = PREFIX[e]; maxn[pre] += 1
     rows.append(dict(c=f"{pre}.{maxn[pre]:02d}", d=d, e=e, u=u, glob=float(p), fonte="Orçamento próprio (custo, antes de margem)", obra="Ribeira – remodelação (L99)",
                      data="2026", fiab="B", obs="Inclui agravamento por acesso condicionado (transporte manual 100 m + escadaria, 1.º andar s/ elevador)"))
+import os
+if os.path.exists(f"{sp}/base_ited_apulia.txt"):
+    for l in open(f"{sp}/base_ited_apulia.txt", encoding="utf-8"):
+        e, d, u, p = l.strip().split("|")
+        pre = PREFIX[e]; maxn[pre] += 1
+        rows.append(dict(c=f"{pre}.{maxn[pre]:02d}", d=d, e=e, u=u, glob=float(p), fonte="Estimativa orçamental do projetista ITED (preço de venda)",
+                         obra="Moradia bifamiliar Apúlia (Vendeiro)", data="Out-2025", fiab="C", obs="Valor do MQ do projeto ITED – provável preço de venda; validar com instalador"))
 order = {e: i for i, e in enumerate(ESP)}
 rows.sort(key=lambda r: (order[r["e"]], r["c"]))
 
@@ -40,7 +47,7 @@ wb = Workbook()
 ins = wb.active; ins.title = "Instruções"; ins.sheet_view.showGridLines = False
 ins.column_dimensions["A"].width = 2; ins.column_dimensions["B"].width = 26; ins.column_dimensions["C"].width = 100
 ins["B1"] = "Base de Preços PROBUILT – preços reais"; ins["B1"].font = Font(name=F, bold=True, size=16, color="1F3864")
-ins["B2"] = "v1.0 · Margem calculada SOBRE O CUSTO · Estrutura compatível com a folha _Produção_Folha_de_orçamento.xlsx"
+ins["B2"] = "v1.1 · Margem calculada SOBRE O CUSTO · Estrutura compatível com a folha _Produção_Folha_de_orçamento.xlsx"
 ins["B2"].font = Font(name=F, italic=True, size=10, color="595959")
 r = 4
 def sec(t):
@@ -72,7 +79,7 @@ line("Para que serve", "Sempre que receber um preço novo (proposta, fatura, or�
 line("Exemplo", "15/10/2026 · ARQ.21 · Moradia X · Proposta pintor Y · 7,90 € · B")
 r += 1
 sec("NOTAS")
-for t in ["Origem: 115 artigos da BASE_PRECOS_2026 (referência de mercado, fiabilidade C) + 32 artigos do orçamento da Ribeira (L99), preços de custo antes de margem (fiabilidade B).",
+for t in ["Origem: 115 artigos da BASE_PRECOS_2026 (referência de mercado, C) + 32 do orçamento da Ribeira (L99, custo, B) + 16 do MQ do projetista ITED da obra de Apúlia (C).",
           "Os preços da Ribeira incluem agravamento por acesso condicionado – ver observações; numa obra sem condicionantes podem ser mais baixos.",
           "HID.05–HID.08 passaram para ESG e TER.04–TER.05 para ACU (códigos mantidos para rastreabilidade).",
           "Especialidades alinhadas com as pastas do Drive: ARQ, EST, HID (inclui PLU), ESG, ELE, ITED, AVAC, GAS, SCIE, TERM, ACU, + GER e CARP para orçamento."]:

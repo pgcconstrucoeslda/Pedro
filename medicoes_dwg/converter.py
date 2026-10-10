@@ -30,6 +30,15 @@ class ConversionError(RuntimeError):
     pass
 
 
+def _oda_windows() -> list[str]:
+    """O instalador do ODA usa pastas com a versão (ex.: 'ODAFileConverter 25.12.0')."""
+    import glob
+    out = []
+    for base in (r"C:\Program Files\ODA", r"C:\Program Files (x86)\ODA"):
+        out += sorted(glob.glob(base + r"\ODAFileConverter*\ODAFileConverter.exe"), reverse=True)
+    return out
+
+
 def _which(cands: list[str]) -> str | None:
     for c in cands:
         p = shutil.which(c) or (c if Path(c).is_file() else None)
@@ -40,7 +49,7 @@ def _which(cands: list[str]) -> str | None:
 
 def find_converter() -> tuple[str, str] | None:
     """Devolve (tipo, executável) do conversor disponível, ou None."""
-    oda = os.environ.get("ODA_CONVERTER") or _which(ODA_CANDIDATES)
+    oda = os.environ.get("ODA_CONVERTER") or _which(ODA_CANDIDATES + _oda_windows())
     if oda:
         return "oda", oda
     lib = os.environ.get("DWG2DXF") or _which(DWG2DXF_CANDIDATES)

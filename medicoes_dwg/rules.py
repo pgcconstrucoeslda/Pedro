@@ -151,6 +151,7 @@ def aplicar_regra(regra: dict, res: Resultado, pe_direito: float, vaos: pd.DataF
         if fonte == "PAREDES_COMPART":
             fs = sel.folha.map(fator_folha)
             det["valor"] = sel[col].fillna(0) * fs
+            det["base_m"] = sel[col].fillna(0)  # perímetro (para a altura implícita do MQ)
             det["descricao"] = sel.compartimento + " (" + sel[col].round(2).astype(str) + " m × " + fs.round(2).astype(str) + ")"
             if deduzir_vaos and _usa_pd(regra.get("fator")):
                 hs = set(sel.handle_poligono)
@@ -178,6 +179,7 @@ def aplicar_regra(regra: dict, res: Resultado, pe_direito: float, vaos: pd.DataF
         if fonte == "AREA_PAREDES":
             fs = sel.folha.map(fator_folha)
             det["valor"] = sel.comprimento * fs
+            det["base_m"] = sel.comprimento
             if deduzir_vaos and _usa_pd(regra.get("fator")):
                 hs = set(sel.handle)
                 # cada vão é descontado uma vez (pode aparecer nos dois compartimentos que separa)

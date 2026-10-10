@@ -70,6 +70,19 @@ def comparar(mq: pd.DataFrame, regras: pd.DataFrame, res: Resultado, pe_direito:
     val_grupo = {g: next((medido[i] for i in ids if i in medido), None) for g, ids in membros.items()}
     mq_grupo = {g: sum(qtd.get(i, 0) or 0 for i in ids) for g, ids in membros.items()}
 
+    # altura implícita do MQ em artigos de paredes: (quantidade MQ + vãos deduzidos) / perímetro
+    alt_impl: dict[str, tuple[float, float]] = {}
+    if det_all:
+        dd = pd.concat(det_all, ignore_index=True)
+        if "base_m" in dd:
+            for item, g in dd.groupby("item_mq"):
+                base = g.base_m.fillna(0).sum()
+                if base > 0:
+                    vaos_area = -g[g.valor < 0].valor.sum()
+                    pdm = g[g.base_m.fillna(0) > 0]
+                    pd_med = (pdm.valor.sum() / base) if not pdm.empty else None
+                    alt_impl[item] = (base, vaos_area, pd_med)
+
     rows = []
     for _, it in mq.iterrows():
         regs = origem.get(it.id, [])
@@ -86,7 +99,15 @@ def comparar(mq: pd.DataFrame, regras: pd.DataFrame, res: Resultado, pe_direito:
             st = estado(dv, tol_ok, tol_alerta)
             if q_dwg == 0:
                 st = "NÃO MEDIDO"
+        h_impl = None
+        if it.id in alt_impl and not g:
+            base, va, pd_med = alt_impl[it.id]
+            h_impl = round((it.quantidade + va) / base, 2)
+            h_bruta = it.quantidade / base
+            obs = obs + [f"Altura implícita no MQ: {h_impl:.2f} m descontando vãos / {h_bruta:.2f} m sem descontar "
+                         f"(pé-direito no desenho {pd_med:.2f} m; perímetro {base:.2f} m; vãos {va:.2f} m²)"]
         rows.append(dict(
+            altura_implicita_mq=h_impl,
             id=it.id, capitulo=it.capitulo, artigo=it.artigo, local=it.local, descricao=it.descricao,
             unidade=it.unidade, qtd_mq=it.quantidade, grupo=g, qtd_mq_comparada=q_cmp,
             qtd_dwg=None if q_dwg is None else round(q_dwg, 2),

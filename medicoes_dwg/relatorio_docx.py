@@ -188,6 +188,31 @@ def gerar_docx(prj, comp: pd.DataFrame | None = None, mq_avisos: list[str] | Non
                         .rename(columns={"qtd_mq_comparada": "MQ", "qtd_dwg": "desenho", "desvio_pct": "desvio %"}),
                         [3.5, 7, 1.2, 1.6, 1.8, 1.6, 1.8, 6], cor_col="estado", fonte=7)
 
+        if cat == "MQ x Desenho" and comp is not None and "altura_implicita_mq" in comp:
+            hi = comp[comp.altura_implicita_mq.notna()].copy()
+            if not hi.empty:
+                doc.add_paragraph("Altura implícita nas quantidades de paredes do MQ (quantidade ÷ perímetro), "
+                                  "para identificar o critério de medição usado:").bold = True
+                hi["descricao"] = hi.descricao.astype(str).str.slice(0, 60)
+                _tabela(doc, hi[["id", "descricao", "qtd_mq", "qtd_dwg", "observacoes"]]
+                        .rename(columns={"qtd_mq": "MQ", "qtd_dwg": "desenho"}), [4, 6, 1.6, 1.8, 11], fonte=7)
+
+    doc.add_heading("Ressalvas para o orçamento", 1)
+    ress = []
+    for _, r in issues[(issues.gravidade == "Alta") & (issues.categoria == "Integridade")].iterrows():
+        if "não têm geometria" in r.descricao:
+            esp = r.especialidade or "especialidade"
+            ress.append(f"{esp}: quantidades não verificadas contra os desenhos (geometria em referências externas não "
+                        f"entregues). Considerar as quantidades do respetivo mapa como não confirmadas e prever margem/risco.")
+    if comp is not None and not comp.empty:
+        sem = int((comp.estado == "SEM REGRA").sum())
+        if sem:
+            ress.append(f"{sem} artigo(s) do MQ sem verificação automática (sem correspondência mensurável no desenho).")
+    ress.append("As medições automáticas dependem da forma como os desenhos foram elaborados; os desvios assinalados "
+                "devem ser confirmados antes de ajustar preços ou quantidades.")
+    for t in ress:
+        doc.add_paragraph(t, style="List Bullet")
+
     doc.add_heading("10. Verificações formais do mapa de quantidades", 1)
     for a in mq_avisos or ["(sem observações)"]:
         doc.add_paragraph(a, style="List Bullet")

@@ -154,6 +154,14 @@ with tabs[0]:
             "layers conhecidos": "; ".join(f"{k}: {', '.join(v[:3])}" for k, v in p["layers_conhecidos"].items()),
             "blocos conhecidos": "; ".join(f"{k}: {', '.join(v[:3])}" for k, v in p["blocos_conhecidos"].items()),
             "documentos": len(p["projetos"])} for p in reg.perfis]), hide_index=True, use_container_width=True)
+        with st.expander("Dar nome a um perfil (quando o gabinete for conhecido)"):
+            c1, c2, c3 = st.columns([1, 3, 1])
+            pid_n = c1.selectbox("Perfil ", [p["id"] for p in reg.perfis], key="ren_pid")
+            novo_nome = c2.text_input("Nome do gabinete/projetista", reg.get(pid_n)["nome"], key="ren_nome")
+            if c3.button("Guardar nome"):
+                reg.get(pid_n).update(nome=novo_nome, gabinete=novo_nome, evidencia_gabinete="indicado pelo utilizador")
+                reg.guardar()
+                st.success("Nome guardado.")
         with st.expander("Ensinar um bloco ao perfil do projetista (ex.: A$C0BD9282B = lavatório)"):
             c1, c2, c3, c4 = st.columns([1, 1, 2, 1])
             pid = c1.selectbox("Perfil", [p["id"] for p in reg.perfis],

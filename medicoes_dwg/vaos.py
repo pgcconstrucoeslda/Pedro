@@ -62,27 +62,36 @@ def detetar_vaos(res) -> pd.DataFrame:
         sg = [s for s in segs if perto(s[1]) or perto(s[2])]
         ac = [a for a in arcs if perto(a[1])]
         n = len(verts)
+        lados = []
         for i in range(n):
             p, q = verts[i], verts[(i + 1) % n]
             L = (q - p).magnitude
             if L * f < 0.4:
                 continue
             u = (q - p) / L
-            nr = Vec2(-u.y, u.x)
-            portas, janelas = [], []
+            lados.append((i, p, u, Vec2(-u.y, u.x), L))
+        # portas: cada arco é atribuído a um só lado (o mais próximo do centro) - evita contar
+        # duas vezes as portas de canto
+        cand_portas: dict = {}
+        for i, p, u, nr, L in lados:
             for h, cen, r, ps, pe in ac:
-                if abs((cen - p).dot(nr)) > dmax:
+                dist = abs((cen - p).dot(nr))
+                if dist > dmax:
                     continue
                 tc = (cen - p).dot(u)
-                # extremidade do arco que assenta na parede (folha fechada)
                 ends = [e for e in (ps, pe) if abs((e - p).dot(nr)) <= dmax]
                 if not ends:
                     continue
                 te = (ends[0] - p).dot(u)
                 a_, b_ = min(tc, te), max(tc, te)
-                if b_ < 0 or a_ > L:
+                # a abertura tem de caber no lado (exclui portas de paredes alinhadas vizinhas)
+                if a_ < -gap or b_ > L + gap:
                     continue
-                portas.append((max(a_, 0), min(b_, L), {h}))
+                if h not in cand_portas or dist < cand_portas[h][0]:
+                    cand_portas[h] = (dist, i, max(a_, 0), min(b_, L))
+        for i, p, u, nr, L in lados:
+            portas = [(a_, b_, {h}) for h, (_, li, a_, b_) in cand_portas.items() if li == i]
+            janelas = []
             for h, a, b in sg:
                 w = b - a
                 if abs(u.x * w.y - u.y * w.x) / w.magnitude > 0.15:

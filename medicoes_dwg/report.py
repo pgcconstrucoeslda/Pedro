@@ -42,7 +42,8 @@ def _sheet(wb, title, df: pd.DataFrame, widths: dict[str, int] | None = None, fr
 
 
 def gerar_relatorio(comp: pd.DataFrame, det: pd.DataFrame, regras: pd.DataFrame, regras_res: pd.DataFrame,
-                    res: Resultado, mq_avisos: list[str], outros_avisos: list[str], params: dict) -> bytes:
+                    res: Resultado, mq_avisos: list[str], outros_avisos: list[str], params: dict,
+                    prj=None, vaos: pd.DataFrame | None = None, perfis: list[dict] | None = None) -> bytes:
     wb = Workbook()
     ws = wb.active
     ws.title = "Resumo"
@@ -90,11 +91,36 @@ def gerar_relatorio(comp: pd.DataFrame, det: pd.DataFrame, regras: pd.DataFrame,
     for st, color in FILL.items():
         wc.conditional_formatting.add(rng, FormulaRule(formula=[f'$L2="{st}"'], fill=PatternFill("solid", fgColor=color)))
 
+    if prj is not None:
+        iss = prj.issues_df()
+        wi = _sheet(wb, "Problemas", iss, widths={"descricao": 90, "evidencia": 40, "acao": 50})
+        cores = {"Alta": "FFC7CE", "Média": "FFEB9C", "Baixa": "DDEBF7", "OK": "C6EFCE"}
+        for r in range(2, len(iss) + 2):
+            c = cores.get(wi.cell(r, 3).value)
+            if c:
+                for col in range(1, len(iss.columns) + 1):
+                    wi.cell(r, col).fill = PatternFill("solid", fgColor=c)
+        _sheet(wb, "Peças", prj.tabela())
     _sheet(wb, "Detalhe medições", det.round(3), widths={"descricao": 40})
     _sheet(wb, "Regras", regras, widths={"notas": 60, "filtro": 25})
     if not regras_res.empty:
         _sheet(wb, "Resultado regras", regras_res.round(3), widths={"erro": 60})
-    _sheet(wb, "Compartimentos", res.compartimentos)
+    _sheet(wb, "Compartimentos", res.compartimentos.drop(columns=["x", "y"], errors="ignore"))
+    if res.pe_direito is not None and not res.pe_direito.empty:
+        _sheet(wb, "Níveis e pé-direito", res.pe_direito)
+    v = vaos if vaos is not None else res.vaos
+    if v is not None and not v.empty:
+        _sheet(wb, "Vãos", v.drop(columns=["x", "y"], errors="ignore"))
+    if res.xrefs:
+        _sheet(wb, "Xrefs", pd.DataFrame(res.xrefs))
+    if perfis:
+        _sheet(wb, "Projetistas", pd.DataFrame([{
+            "id": p["id"], "nome": p["nome"], "gabinete": p.get("gabinete", ""), "evidência": p.get("evidencia_gabinete", ""),
+            "especialidades": ", ".join(p["especialidades"]), "autores": ", ".join(p["autores"]),
+            "blocos legenda": ", ".join(p["blocos_legenda"]), "prefixos layers": ", ".join(p["prefixos_layers"]),
+            "layers conhecidos": "; ".join(f"{k}: {', '.join(v)}" for k, v in p["layers_conhecidos"].items()),
+            "blocos conhecidos": "; ".join(f"{k}: {', '.join(v)}" for k, v in p["blocos_conhecidos"].items()),
+            "nº documentos": len(p["projetos"])} for p in perfis]))
     p = res.paredes
     if not p.empty:
         resumo = (p.assign(esp_classe=(p.espessura / 0.05).round() * 0.05)

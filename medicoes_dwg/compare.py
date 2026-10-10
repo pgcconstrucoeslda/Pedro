@@ -21,15 +21,29 @@ def estado(desvio: float | None, tol_ok: float, tol_alerta: float) -> str:
 
 
 def comparar(mq: pd.DataFrame, regras: pd.DataFrame, res: Resultado, pe_direito: float = 2.50,
-             tol_ok: float = 0.03, tol_alerta: float = 0.10) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """Devolve (comparacao, detalhe, regras_resultado)."""
+             tol_ok: float = 0.03, tol_alerta: float = 0.10, vaos: pd.DataFrame | None = None,
+             deduzir_vaos: bool = True, usar_pd_desenho: bool = True,
+             alt_porta: float = 2.10, alt_janela: float = 2.10) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Devolve (comparacao, detalhe, regras_resultado).
+
+    ``vaos``: tabela de vãos (editada pelo utilizador); por defeito usa a detetada no
+    desenho, associada ao mapa de vãos do MQ, com alturas por defeito nas restantes.
+    """
+    from .niveis import pd_por_folha
+    from .vaos import aplicar_alturas, associar_mq, mapa_vaos_mq
+    if vaos is None:
+        vaos = getattr(res, "vaos", None)
+        if vaos is not None and not vaos.empty:
+            vaos = associar_mq(vaos, mapa_vaos_mq(mq))
+    vaos = aplicar_alturas(vaos, alt_porta, alt_janela) if vaos is not None and not vaos.empty else vaos
+    pd_folhas = pd_por_folha(res, pe_direito) if usar_pd_desenho else {}
     det_all, rres = [], []
     medido: dict[str, float] = {}
     origem: dict[str, list[str]] = {}
     erros: dict[str, list[str]] = {}
     ativas = regras[regras.ativo.fillna(True).astype(bool)] if not regras.empty else regras
     for _, r in ativas.iterrows():
-        val, det, err = aplicar_regra(r.to_dict(), res, pe_direito)
+        val, det, err = aplicar_regra(r.to_dict(), res, pe_direito, vaos, deduzir_vaos, pd_folhas)
         rres.append(dict(regra=r.regra, item_mq=r.item_mq, fonte=r.fonte, valor=val, n_entidades=len(det), erro=err))
         if val is not None:
             medido[r.item_mq] = medido.get(r.item_mq, 0.0) + val

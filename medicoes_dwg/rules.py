@@ -80,9 +80,36 @@ def _folhas_sel(res: Resultado, rx) -> set[str]:
     return {f.id for f in res.folhas if rx.search(f.id) or rx.search(f.nome) or rx.search(f.nivel or "")}
 
 
-def aplicar_regra(regra: dict, res: Resultado, pe_direito: float) -> tuple[float | None, pd.DataFrame, str]:
-    """Devolve (valor, detalhe, erro). O detalhe lista as entidades que contribuem."""
+def _usa_pd(fator) -> bool:
+    return "PD" in str(fator or "").upper()
+
+
+def _deducoes_vaos(vaos: pd.DataFrame | None, mask) -> pd.DataFrame:
+    if vaos is None or vaos.empty:
+        return pd.DataFrame()
+    v = vaos[mask(vaos)]
+    v = v[v.area.notna() & (v.area > 0)]
+    if v.empty:
+        return pd.DataFrame()
+    cod = v.get("codigo_mq", pd.Series("", index=v.index)).fillna("")
+    return pd.DataFrame({
+        "handle": v.handles, "folha": v.folha, "layer": "(vão)",
+        "descricao": "dedução " + v.id + " " + v.tipo + " " + v.largura.map("{:.2f}".format) + "x"
+                     + v.altura.map("{:.2f}".format) + " " + cod + " - " + v.compartimento,
+        "valor": -v.area,
+    })
+
+
+def aplicar_regra(regra: dict, res: Resultado, pe_direito: float, vaos: pd.DataFrame | None = None,
+                  deduzir_vaos: bool = True, pd_folhas: dict | None = None) -> tuple[float | None, pd.DataFrame, str]:
+    """Devolve (valor, detalhe, erro). O detalhe lista as entidades que contribuem.
+
+    ``pd_folhas``: pé-direito por folha (lido dos cortes); o fator "PD" usa o da folha
+    de cada elemento e, na falta, ``pe_direito``. Com ``deduzir_vaos`` as áreas de
+    paredes calculadas com PD descontam os vãos detetados (linhas negativas no detalhe).
+    """
     fonte = regra.get("fonte")
+    pd_folhas = pd_folhas or {}
     try:
         fator = avaliar_fator(regra.get("fator"), pe_direito)
         ded = float(regra.get("deducao") or 0)
@@ -91,6 +118,9 @@ def aplicar_regra(regra: dict, res: Resultado, pe_direito: float) -> tuple[float
         folhas = _folhas_sel(res, _rx(regra.get("folhas")))
     except (re.error, ValueError) as ex:
         return None, pd.DataFrame(), str(ex)
+
+    def fator_folha(fid):
+        return avaliar_fator(regra.get("fator"), pd_folhas.get(fid, pe_direito))
 
     det = pd.DataFrame()
     if fonte == "VALOR_MANUAL":
@@ -117,11 +147,17 @@ def aplicar_regra(regra: dict, res: Resultado, pe_direito: float) -> tuple[float
             "folha": sel.folha, "layer": sel.layer_poligono, "descricao": sel.compartimento,
             "valor": sel[col],
         })
-        val = float(sel[col].fillna(0).sum())
         err = f"{len(falta)} compartimento(s) sem polígono: " + ", ".join(falta.compartimento) if len(falta) else ""
         if fonte == "PAREDES_COMPART":
-            det["valor"] = det["valor"] * fator
-            return val * fator - ded, det, err
+            fs = sel.folha.map(fator_folha)
+            det["valor"] = sel[col].fillna(0) * fs
+            det["descricao"] = sel.compartimento + " (" + sel[col].round(2).astype(str) + " m × " + fs.round(2).astype(str) + ")"
+            if deduzir_vaos and _usa_pd(regra.get("fator")):
+                hs = set(sel.handle_poligono)
+                dd = _deducoes_vaos(vaos, lambda v: v.handle_poligono.isin(hs))
+                det = pd.concat([det, dd], ignore_index=True)
+            return float(det.valor.sum()) - ded, det, err
+        val = float(sel[col].fillna(0).sum())
         return val * fator - ded, det, err
 
     if fonte in ("COMPRIMENTO_PAREDES", "AREA_PAREDES"):
@@ -139,11 +175,17 @@ def aplicar_regra(regra: dict, res: Resultado, pe_direito: float) -> tuple[float
             sel = sel[sel.espessura <= float(hi)]
         det = pd.DataFrame({"handle": sel.handle, "folha": sel.folha, "layer": sel.layer,
                             "descricao": "parede e=" + sel.espessura.round(3).astype(str), "valor": sel.comprimento})
-        val = float(sel.comprimento.sum())
         if fonte == "AREA_PAREDES":
-            det["valor"] = det["valor"] * fator
-            return val * fator - ded, det, ""
-        return val * fator - ded, det, ""
+            fs = sel.folha.map(fator_folha)
+            det["valor"] = sel.comprimento * fs
+            if deduzir_vaos and _usa_pd(regra.get("fator")):
+                hs = set(sel.handle)
+                # cada vão é descontado uma vez (pode aparecer nos dois compartimentos que separa)
+                vv = vaos.drop_duplicates(subset=["handles"]) if vaos is not None and not vaos.empty else vaos
+                dd = _deducoes_vaos(vv, lambda v: v.handle_parede.isin(hs))
+                det = pd.concat([det, dd], ignore_index=True)
+            return float(det.valor.sum()) - ded, det, ""
+        return float(sel.comprimento.sum()) * fator - ded, det, ""
 
     e = res.entidades
     sel = e[e.folha.isin(folhas)]
@@ -225,13 +267,28 @@ def _nivel_de_local(local: str, res: Resultado) -> list[str]:
     return out
 
 
-def sugerir_regras(mq: pd.DataFrame, res: Resultado, pe_direito: float = 2.50) -> tuple[pd.DataFrame, list[str]]:
+PAPEL_DICIONARIO = {  # palavra-chave -> (tipo, papel no perfil do projetista)
+    r"rodap": ("layer", "rodape"), r"guarda": ("layer", "guardas"), r"muro": ("layer", "muros"),
+    r"sanita": ("bloco", "sanita"), r"autoclismo|geberit": ("bloco", "sanita"), r"lavatorio": ("bloco", "lavatorio"),
+    r"banheira": ("bloco", "banheira"), r"baseduche": ("bloco", "duche"),
+    r"portasdebatente|portadebatente|portainterior|portasinteriores": ("bloco", "porta"),
+}
+
+
+def _exato(nomes: list[str]) -> str:
+    return "^(?:" + "|".join(re.escape(n) for n in nomes) + ")$"
+
+
+def sugerir_regras(mq: pd.DataFrame, res: Resultado, pe_direito: float = 2.50,
+                   perfil: dict | None = None) -> tuple[pd.DataFrame, list[str]]:
+    """Sugere regras. Com ``perfil`` (projetista) usa os layers/blocos que esse gabinete
+    usa para cada papel (aprendidos de projetos anteriores ou ensinados na aplicação)."""
     regras, avisos = [], []
     comps = res.compartimentos
     nomes = sorted({c for c in comps.compartimento if c and c != "(sem nome)"}, key=lambda s: -len(norm(s))) if not comps.empty else []
     plantas = [f.id for f in res.folhas if re.search(r"piso|r/c|cave|planta", f"{f.nome} {f.nivel}", re.I)
                and not re.search(r"implanta|cobertura", f.nome, re.I)]
-    rx_plantas = "^(" + "|".join(plantas) + ")$" if plantas else ""
+    rx_plantas = "^(?:" + "|".join(plantas) + ")$" if plantas else ""
 
     def add(item, fonte, conf, notas, folhas="", layers="", filtro="", excluir="", fator="1", esp=(None, None), grupo=""):
         regras.append(dict(regra="", ativo=True, item_mq=item, grupo=grupo, fonte=fonte, folhas=folhas, layers=layers,
@@ -255,7 +312,7 @@ def sugerir_regras(mq: pd.DataFrame, res: Resultado, pe_direito: float = 2.50) -
             filtro = "^" + re.escape(norm(comp)) + "$"
             if is_paredes:
                 add(it.id, "PAREDES_COMPART", "média" if nl and "parede" not in str(it.capitulo).lower() else "baixa",
-                    f"Perímetro de '{comp}' × PD (todas as paredes do compartimento); deduzir vãos", filtro=filtro, fator="PD")
+                    f"Perímetro de '{comp}' × PD do piso (lido dos cortes) − vãos detetados", filtro=filtro, fator="PD")
             else:
                 add(it.id, "AREA_COMPART", "alta" if nl else "baixa",
                     f"Área do compartimento '{comp}'" + ("" if nl else " (citado na descrição - confirmar)"), filtro=filtro)
@@ -273,6 +330,15 @@ def sugerir_regras(mq: pd.DataFrame, res: Resultado, pe_direito: float = 2.50) -
                 else:
                     folhas = rx_plantas
                 grupo = f"G{it.artigo}" if kw in SOMAR_EM_GRUPO else ""
+                if perfil and kw in PAPEL_DICIONARIO:
+                    tipo_p, papel = PAPEL_DICIONARIO[kw]
+                    conhecidos = perfil.get("layers_conhecidos" if tipo_p == "layer" else "blocos_conhecidos", {}).get(papel)
+                    if conhecidos:
+                        if tipo_p == "layer":
+                            layers = _exato(conhecidos)
+                        else:
+                            filtro = _exato(conhecidos)
+                        notas += f" [perfil {perfil['id']}]"
                 add(it.id, fonte, "média" if kw != "muro" else "baixa", notas, folhas=folhas, layers=layers,
                     filtro=filtro, fator=fator, grupo=grupo)
                 feito = True
@@ -282,15 +348,15 @@ def sugerir_regras(mq: pd.DataFrame, res: Resultado, pe_direito: float = 2.50) -
         if not feito and it.unidade == "m²" and is_paredes and (fol_local or not nl):
             for kw, lo, hi, notas in PAREDES_ESP:
                 if re.search(kw, nd):
-                    add(it.id, "AREA_PAREDES", "baixa", f"{notas} × PD (estimativa a partir das tramas; deduzir vãos)",
-                        folhas="^(" + "|".join(fol_local) + ")$" if fol_local else rx_plantas, fator="PD", esp=(lo, hi))
+                    add(it.id, "AREA_PAREDES", "baixa", f"{notas} × PD do piso (estimativa a partir das tramas) − vãos detetados",
+                        folhas="^(?:" + "|".join(fol_local) + ")$" if fol_local else rx_plantas, fator="PD", esp=(lo, hi))
                     feito = True
                     break
 
         # 4) local = piso -> soma de compartimentos dessa planta (pavimentos/tectos)
         if not feito and it.unidade == "m²" and fol_local and not is_paredes:
             add(it.id, "AREA_COMPART", "baixa", "Soma de todos os compartimentos da planta - rever exclusões",
-                folhas="^(" + "|".join(fol_local) + ")$")
+                folhas="^(?:" + "|".join(fol_local) + ")$")
 
     df = pd.DataFrame(regras, columns=COLUNAS)
     df["regra"] = [f"R{i + 1:03d}" for i in range(len(df))]

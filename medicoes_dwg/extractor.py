@@ -65,6 +65,16 @@ class Resultado:
     compartimentos: pd.DataFrame
     paredes: pd.DataFrame
     avisos: list[str] = field(default_factory=list)
+    # --- dados auxiliares (coordenadas em unidades do desenho) ---
+    poligonos: dict = field(default_factory=dict)        # handle -> [Vec2] (compartimentos e paredes)
+    segs_vaos: list = field(default_factory=list)        # (handle, Vec2 a, Vec2 b) em layers de vãos
+    arcos_vaos: list = field(default_factory=list)       # (handle, centro, raio, p_inicio, p_fim)
+    cotas_dim: pd.DataFrame = field(default_factory=pd.DataFrame)  # cotas dimensionais
+    legenda: dict = field(default_factory=dict)          # atributos da legenda (rótulo)
+    xrefs: list = field(default_factory=list)            # [{nome, caminho, estado, entidades}]
+    vaos: pd.DataFrame = field(default_factory=pd.DataFrame)
+    niveis: pd.DataFrame = field(default_factory=pd.DataFrame)
+    pe_direito: pd.DataFrame = field(default_factory=pd.DataFrame)
 
     def folhas_df(self) -> pd.DataFrame:
         return pd.DataFrame([f.__dict__ for f in self.folhas])
@@ -424,44 +434,234 @@ def _medir(e, t: str):
     return b.center.x, b.center.y, 0.0, 0.0, 0.0, False, None
 
 
-def extrair(dxf_path: str, unidade: str | None = None, layers_ignorar: str = "", progress=None) -> Resultado:
+RE_VAOS_LAYER = r"porta|janela|v[ãa]o|vaos|caixilh|door|window|esquadr"
+RE_XREF_NOME = re.compile(r"^xref", re.I)
+
+
+def _is_xref(blk) -> bool:
+    try:
+        if blk.block_record.is_xref:
+            return True
+        if blk.block.dxf.hasattr("xref_path") and blk.block.dxf.xref_path:
+            return True
+    except Exception:
+        pass
+    return bool(RE_XREF_NOME.match(blk.name))
+
+
+def _xref_path(blk) -> str:
+    try:
+        return blk.block.dxf.get("xref_path", "") if blk.block.dxf.hasattr("xref_path") else ""
+    except Exception:
+        return ""
+
+
+def _basename(p: str) -> str:
+    return re.split(r"[\\/]", p)[-1].rsplit(".", 1)[0].lower() if p else ""
+
+
+def _iterar(doc, fonte, xref_docs: dict, xinfo: list, avisos: list):
+    """Gera (entidade, handle, layer) do espaço modelo, expandindo xrefs.
+
+    * xref carregada (ficheiro fornecido) -> entidades do ficheiro transformadas;
+    * xref já embutida (bloco com entidades) -> entidades virtuais;
+    * xref vazia sem ficheiro -> registada como em falta.
+    """
+    for e in fonte:
+        if e.dxftype() != "INSERT":
+            yield e, e.dxf.handle, e.dxf.layer
+            continue
+        blk = doc.blocks.get(e.dxf.name)
+        if blk is None or not _is_xref(blk):
+            yield e, e.dxf.handle, e.dxf.layer
+            continue
+        nome = blk.name
+        chave = _basename(_xref_path(blk)) or nome.lower()
+        xd = xref_docs.get(chave) or xref_docs.get(nome.lower())
+        info = dict(nome=nome, caminho=_xref_path(blk), estado="", entidades=0)
+        xinfo.append(info)
+        if xd is not None:
+            m = e.matrix44()
+            n = 0
+            for j, x in enumerate(xd.modelspace()):
+                try:
+                    c = x.copy()
+                    c.transform(m)
+                except Exception:
+                    continue
+                n += 1
+                yield c, f"{e.dxf.handle}>{x.dxf.handle}", f"{nome}|{x.dxf.layer}"
+            info.update(estado="carregada do ficheiro", entidades=n)
+        elif len(blk):
+            n = 0
+            try:
+                for j, x in enumerate(e.virtual_entities()):
+                    n += 1
+                    yield x, f"{e.dxf.handle}>{j}", f"{nome}|{x.dxf.layer}"
+            except Exception as ex:
+                avisos.append(f"Xref '{nome}' não expandida: {ex}")
+            info.update(estado="embutida no desenho", entidades=n)
+        else:
+            info.update(estado="EM FALTA")
+
+
+def _xrefs_nao_inseridas(doc, xinfo: list) -> None:
+    usados = {i["nome"] for i in xinfo}
+    for blk in doc.blocks:
+        if blk.name in usados or blk.name.startswith("*") or not _is_xref(blk):
+            continue
+        xinfo.append(dict(nome=blk.name, caminho=_xref_path(blk),
+                          estado="definida mas não inserida no modelo" + (f" ({len(blk)} entidades)" if len(blk) else ""),
+                          entidades=len(blk)))
+
+
+def _legenda(doc) -> dict:
+    """Atributos de blocos no espaço papel (rótulo/legenda) + títulos de vistas."""
+    out: dict = {}
+    titulos = []
+    for lay in doc.layouts:
+        if lay.name.lower() == "model":
+            continue
+        for e in lay.query("INSERT"):
+            for a in e.attribs:
+                tag, val = a.dxf.tag.strip().upper(), " ".join(str(a.dxf.text).split())
+                if not val or val.upper() in ("XXXX", "-"):
+                    continue
+                if tag.startswith("TITULO") and tag != "TITULO":
+                    titulos.append(val)
+                else:
+                    out.setdefault(tag, val)
+            try:
+                blk = doc.blocks.get(e.dxf.name)
+                if blk is not None and len(blk) < 3000:
+                    for x in blk.query("INSERT"):
+                        for a in x.attribs:
+                            val = " ".join(str(a.dxf.text).split())
+                            if val:
+                                out.setdefault(a.dxf.tag.strip().upper(), val)
+            except Exception:
+                pass
+    if titulos:
+        out["VISTAS"] = "; ".join(dict.fromkeys(titulos))
+    blocos = sorted({b.name for b in doc.blocks if not b.name.startswith("*")})
+    out["_BLOCOS"] = blocos
+    return out
+
+
+def _dim_info(e):
+    """(x, y_baixo, y_alto, valor, vertical) de uma cota linear, ou None."""
+    try:
+        if (e.dxf.dimtype & 7) not in (0, 1):
+            return None
+        p2, p3 = e.dxf.get("defpoint2"), e.dxf.get("defpoint3")
+        if p2 is None or p3 is None:
+            return None
+        val = e.get_measurement()
+        ang = e.dxf.get("angle", 0) % 180
+        vertical = abs(ang - 90) < 1 if (e.dxf.dimtype & 7) == 0 else abs(p2.x - p3.x) < 1e-6
+        return (p2.x + p3.x) / 2, min(p2.y, p3.y), max(p2.y, p3.y), float(val), vertical
+    except Exception:
+        return None
+
+
+def _segmentos(e, depth=0):
+    """Segmentos (a, b) e arcos (centro, raio) de uma entidade de vão (inclui blocos)."""
+    segs, arcs = [], []
+    t = e.dxftype()
+    try:
+        if t == "LINE":
+            segs.append((Vec2(e.dxf.start), Vec2(e.dxf.end)))
+        elif t in ("LWPOLYLINE", "POLYLINE"):
+            v, fech = _polyline_vertices(e)
+            segs += list(zip(v, v[1:] + ([v[0]] if fech else [])))
+        elif t == "ARC":
+            c, r = Vec2(e.dxf.center), float(e.dxf.radius)
+            arcs.append((c, r, c + Vec2.from_deg_angle(e.dxf.start_angle, r), c + Vec2.from_deg_angle(e.dxf.end_angle, r)))
+        elif t == "INSERT" and depth < 2:
+            for x in e.virtual_entities():
+                s2, a2 = _segmentos(x, depth + 1)
+                segs += s2
+                arcs += a2
+    except Exception:
+        pass
+    return segs, arcs
+
+
+def extrair(dxf_path: str, unidade: str | None = None, layers_ignorar: str = "", progress=None,
+            xrefs: dict[str, str] | None = None, bloco_fonte: str | None = None,
+            layers_vaos: str = RE_VAOS_LAYER) -> Resultado:
+    """Extrai a geometria do espaço modelo (ou de um bloco, ex.: base de arquitetura embutida).
+
+    ``xrefs``: {nome_ficheiro_sem_extensão: caminho DXF} para resolver referências externas.
+    """
     doc, avisos = _ler(dxf_path)
     _CENTROS_BLOCOS.clear()
     msp = doc.modelspace()
+    fonte = doc.blocks[bloco_fonte] if bloco_fonte else msp
     re_ign = re.compile(layers_ignorar, re.I) if layers_ignorar else None
+    re_vao = re.compile(layers_vaos, re.I) if layers_vaos else None
     efetivos = _nomes_blocos_efetivos(doc)
+    xref_docs = {}
+    for k, path in (xrefs or {}).items():
+        try:
+            xref_docs[_basename(k) or k.lower()] = _ler(path)[0]
+        except Exception as ex:
+            avisos.append(f"Não foi possível ler a xref '{k}': {ex}")
+    xinfo: list = []
 
     rows = []
     polys = []  # (handle, layer, tipo, area, perimetro, vertices) em unidades do desenho
-    ents = [e for e in msp if not (re_ign and re_ign.search(e.dxf.layer))]
+    segs_vaos, arcos_vaos, dims = [], [], []
+    ents = list(_iterar(doc, fonte, xref_docs, xinfo, avisos))
+    if not bloco_fonte:
+        _xrefs_nao_inseridas(doc, xinfo)
     n = len(ents)
-    for i, e in enumerate(ents):
+    for i, (e, hdl, layer) in enumerate(ents):
+        if re_ign and re_ign.search(layer):
+            continue
         if progress and i % 5000 == 0:
             progress(0.9 * i / max(n, 1))
         t = e.dxftype()
+        if t == "DIMENSION":
+            d = _dim_info(e)
+            if d:
+                dims.append((hdl, layer, *d))
         try:
             m = _medir(e, t)
         except Exception as ex:  # entidade problemática: regista e continua
-            avisos.append(f"Entidade {e.dxf.handle} ({t}) ignorada: {ex}")
+            avisos.append(f"Entidade {hdl} ({t}) ignorada: {ex}")
             continue
         if m is None:
             continue
         cx, cy, comp, area, per, fechado, verts = m
-        bloco = texto = ""
+        bloco = texto = tag = ""
         altura = 0.0
         if t == "INSERT":
             bloco = efetivos.get(e.dxf.name, e.dxf.name)
+            try:
+                for a in e.attribs:
+                    val = " ".join(str(a.dxf.text).split())
+                    if val:
+                        p = a.dxf.insert
+                        rows.append((f"{hdl}#{a.dxf.tag}", layer, "ATTRIB", bloco, val, float(a.dxf.get("height", 0) or 0),
+                                     False, 0.0, 0.0, 0.0, p.x, p.y, a.dxf.tag))
+            except Exception:
+                pass
         elif t == "HATCH":
             bloco = e.dxf.get("pattern_name", "")
         elif t in ("TEXT", "MTEXT"):
             texto = _text_of(e)
             altura = _text_height(e)
-        rows.append((e.dxf.handle, e.dxf.layer, t, bloco, texto, altura, fechado, comp, area, per, cx, cy))
+        rows.append((hdl, layer, t, bloco, texto, altura, fechado, comp, area, per, cx, cy, tag))
         if verts is not None and area > 0:
-            polys.append((e.dxf.handle, e.dxf.layer, t, area, per, verts))
+            polys.append((hdl, layer, t, area, per, verts))
+        if re_vao is not None and (re_vao.search(layer) or (t == "INSERT" and re_vao.search(bloco))):
+            sg, ac = _segmentos(e)
+            segs_vaos += [(hdl, a_, b_) for a_, b_ in sg]
+            arcos_vaos += [(hdl, *a_) for a_ in ac]
 
     df = pd.DataFrame(rows, columns=["handle", "layer", "tipo", "bloco", "texto", "altura", "fechado",
-                                     "comprimento", "area", "perimetro", "x", "y"])
+                                     "comprimento", "area", "perimetro", "x", "y", "tag"])
     # extensão "robusta" (ignora 0,5 % de pontos extremos/perdidos)
     ext = bbox.BoundingBox()
     if not df.empty:
@@ -474,7 +674,9 @@ def extrair(dxf_path: str, unidade: str | None = None, layers_ignorar: str = "",
     f = UNIT_FACTORS[unidade]
     f2 = f * f
 
-    folhas = detetar_folhas(doc, ext)
+    folhas = detetar_folhas(doc, ext) if not bloco_fonte else []
+    if not folhas and ext.has_data:
+        folhas = [Folha("F01", "Modelo", ext.extmin.x, ext.extmin.y, ext.extmax.x, ext.extmax.y, "modelo")]
     df.insert(1, "folha", "")
     for fo in folhas:  # a primeira folha que contém o ponto ganha
         m = (df.folha == "") & df.x.between(fo.xmin, fo.xmax) & df.y.between(fo.ymin, fo.ymax)
@@ -498,16 +700,42 @@ def extrair(dxf_path: str, unidade: str | None = None, layers_ignorar: str = "",
             avisos.append(
                 f"As áreas geométricas são {ratio:.3g}x as etiquetas: provável unidade errada (atual '{unidade}')."
             )
+    usados = set(comps.handle_poligono) | set(paredes.handle) if not comps.empty else set(paredes.handle)
+    poligonos = {h: v for _, h, _, _, _, _, v in polys if h in usados}
+
+    def fol(x, y):
+        for fo in folhas:
+            if fo.contem(x, y):
+                return fo.id
+        return ""
+
+    cotas = pd.DataFrame([(h, fol(x, (y0 + y1) / 2), lay, x, y0, y1, v * f, vert) for h, lay, x, y0, y1, v, vert in dims],
+                         columns=["handle", "folha", "layer", "x", "y_baixo", "y_alto", "valor", "vertical"])
+    for xi in xinfo:
+        if xi["estado"] == "EM FALTA":
+            avisos.append(f"Xref em falta: '{xi['nome']}' ({xi['caminho'] or 'caminho desconhecido'}) - "
+                          "a geometria desta referência não está no ficheiro; carregue o DWG/DXF correspondente.")
+    res = Resultado(str(dxf_path), unidade, f, folhas, df, comps, paredes, avisos,
+                    poligonos=poligonos, segs_vaos=segs_vaos, arcos_vaos=arcos_vaos, cotas_dim=cotas,
+                    legenda=_legenda(doc), xrefs=xinfo)
+    try:
+        from .niveis import calcular_niveis
+        from .vaos import detetar_vaos
+        res.niveis, res.pe_direito = calcular_niveis(res)
+        res.vaos = detetar_vaos(res)
+    except Exception as ex:  # nunca bloquear a extração base
+        avisos.append(f"Níveis/vãos não calculados: {ex}")
     if progress:
         progress(1.0)
-    return Resultado(str(dxf_path), unidade, f, folhas, df, comps, paredes, avisos)
+    return res
 
 
 def _compartimentos(textos: pd.DataFrame, polys, f: float) -> pd.DataFrame:
     rows = []
     if textos.empty:
         return pd.DataFrame(columns=["folha", "compartimento", "area_etiqueta", "area_geometria",
-                                     "perimetro", "desvio_%", "handle_etiqueta", "handle_poligono", "layer_poligono"])
+                                     "perimetro", "desvio_%", "handle_etiqueta", "handle_poligono", "layer_poligono",
+                                     "x", "y"])
     areas = textos[textos.texto.str.match(RE_AREA)]
     outros = textos[~textos.texto.str.match(RE_AREA) & (textos.texto.str.len().between(2, 60))
                     & ~textos.texto.str.fullmatch(r"[\d.,\s]+")]
@@ -539,9 +767,10 @@ def _compartimentos(textos: pd.DataFrame, polys, f: float) -> pd.DataFrame:
             perimetro=round(best[2], 3) if best else None,
             **{"desvio_%": round((best[1] - val) / val * 100, 1) if best and val else None},
             handle_etiqueta=a.handle, handle_poligono=best[0] if best else "",
-            layer_poligono=best[3] if best else "",
+            layer_poligono=best[3] if best else "", x=a.x, y=a.y,
         ))
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows, columns=["folha", "compartimento", "area_etiqueta", "area_geometria", "perimetro",
+                                       "desvio_%", "handle_etiqueta", "handle_poligono", "layer_poligono", "x", "y"])
 
 
 RE_PAREDE_DEFAULT = r"parede|wall|alvenaria"

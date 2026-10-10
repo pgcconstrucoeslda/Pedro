@@ -8,3 +8,7 @@ __pycache__/
 *.xlsx
 !tests/dados/*.dxf
 .streamlit/secrets.toml
+# registo de projetistas (dados do utilizador) e relatórios gerados
+perfis/
+saidas/
+*.docx

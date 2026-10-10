@@ -1,0 +1,115 @@
+ARQ.01|Demolição de paredes em tijolo|ARQ|m²|12
+ARQ.02|Demolição de pavimento em betão|ARQ|m²|18
+ARQ.03|Demolição de cobertura em telha|ARQ|m²|14
+ARQ.04|Paredes exteriores pano duplo tijolo 11+11 c/ caixa ar|ARQ|m²|55
+ARQ.05|Paredes interiores tijolo 11|ARQ|m²|32
+ARQ.06|Paredes interiores tijolo 7|ARQ|m²|26
+ARQ.07|Reboco interior argamassa tradicional|ARQ|m²|18
+ARQ.08|Reboco exterior argamassa monocamada|ARQ|m²|22
+ARQ.09|ETICS parede exterior (EPS 60mm + acabamento)|ARQ|m²|65
+ARQ.10|ETICS parede exterior (EPS 80mm + acabamento)|ARQ|m²|72
+ARQ.11|Revestimento cerâmico parede interior (colocação)|ARQ|m²|28
+ARQ.12|Revestimento cerâmico parede exterior (colocação)|ARQ|m²|32
+ARQ.13|Pavimento cerâmico (colocação)|ARQ|m²|25
+ARQ.14|Pavimento flutuante laminado AC4|ARQ|m²|22
+ARQ.15|Pavimento vinílico LVT|ARQ|m²|28
+ARQ.16|Pavimento microcimento (2 demãos acabamento)|ARQ|m²|85
+ARQ.17|Rodapé MDF 10cm pintado|ARQ|m|6.5
+ARQ.18|Tecto falso pladur BA13|ARQ|m²|28
+ARQ.19|Tecto falso pladur hidrófugo WA13|ARQ|m²|32
+ARQ.20|Tecto falso pladur curvo (raio até 1,5m)|ARQ|m²|55
+ARQ.21|Pintura interior tinta plástica (2 demãos c/ primário)|ARQ|m²|8.5
+ARQ.22|Pintura exterior tinta acrílica (2 demãos)|ARQ|m²|10
+ARQ.23|Impermeabilização varanda/terraço (manta butil 1,5mm)|ARQ|m²|35
+ARQ.24|Impermeabilização cobertura plana (manta betuminosa 4kg)|ARQ|m²|28
+ARQ.25|Porta interior pré-fabricada MDF lacada|ARQ|un|320
+ARQ.26|Porta exterior blindada 90cm|ARQ|un|950
+ARQ.27|Janela PVC duplo vidro (até 1,2×1,2m)|ARQ|un|480
+ARQ.28|Janela PVC duplo vidro (até 1,5×1,5m)|ARQ|un|620
+ARQ.29|Portada exterior alumínio|ARQ|un|380
+ARQ.30|Guarda-corpo inox escovado|ARQ|m|320
+EST.01|Betão de limpeza C12/15|EST|m³|95
+EST.02|Betão em fundações C25/30 (exec. c/ bomba)|EST|m³|145
+EST.03|Betão em pilares C25/30|EST|m³|165
+EST.04|Betão em vigas C25/30|EST|m³|155
+EST.05|Betão em laje maciça C25/30|EST|m³|150
+EST.06|Betão em laje aligeirada (PAVICER) C25/30|EST|m²|62
+EST.07|Betão em escadas C25/30|EST|m³|175
+EST.08|Aço A400 em varão (fornecimento + colocação)|EST|kg|1.45
+EST.09|Aço A500 em varão (fornecimento + colocação)|EST|kg|1.55
+EST.10|Cofragem recuperável em pilares|EST|m²|22
+EST.11|Cofragem recuperável em vigas|EST|m²|28
+EST.12|Cofragem recuperável em lajes|EST|m²|18
+EST.13|Micropilote D150mm (perfuração + injecção)|EST|m|120
+EST.14|Muro contenção betão armado (e=30cm)|EST|m²|185
+EST.15|Escavação em terreno médio (retroescavadora)|EST|m³|12
+EST.16|Escavação em rocha (martelo hidráulico)|EST|m³|45
+EST.17|Aterro e compactação com material seleccionado|EST|m³|18
+EST.18|Tratamento de fissuras em estrutura existente|EST|m|85
+HID.01|Ramal abastecimento água PE100 D32|HID|m|18
+HID.02|Tubagem PPR PN20 D20 (abastecimento interior)|HID|m|12
+HID.03|Tubagem PPR PN20 D25|HID|m|14
+HID.04|Tubagem PPR PN20 D32|HID|m|18
+HID.05|Tubo queda PVC SN4 D110 (esgoto)|ESG|m|22
+HID.06|Ramal de descarga PVC D50 (esgoto)|ESG|m|14
+HID.07|Ramal de descarga PVC D75|ESG|m|18
+HID.08|Caixa de visita betão D60 (h até 1,2m)|ESG|un|320
+HID.09|Aquecedor a gás 11l/min (inc. instalação)|HID|un|680
+HID.10|Esquentador termostático 14l/min|HID|un|850
+HID.11|Torneira misturadora (louça sanitária excluída)|HID|un|180
+HID.12|Autoclismo embutido + placa de comando|HID|un|320
+HID.13|Bomba circulação solar|HID|un|420
+HID.14|Painel solar plano (2m²)|HID|un|950
+HID.15|Depósito AQS 200l c/ serpentina|HID|un|1100
+ELE.01|Ramal eléctrico monofásico (Caixa Contador)|ELE|un|850
+ELE.02|Quadro eléctrico geral até 16 disjuntores|ELE|un|680
+ELE.03|Quadro eléctrico geral até 24 disjuntores|ELE|un|920
+ELE.04|Circuito iluminação (cabo + canalização)|ELE|m|8.5
+ELE.05|Circuito tomadas (cabo + canalização)|ELE|m|9.5
+ELE.06|Ponto de luz (caixa + ligações)|ELE|un|45
+ELE.07|Tomada dupla encastrada|ELE|un|35
+ELE.08|Tomada 16A (forno/máquina)|ELE|un|45
+ELE.09|Interruptor simples|ELE|un|28
+ELE.10|Interruptor duplo|ELE|un|35
+ELE.11|Campainha + botão|ELE|un|120
+ELE.12|Videoporteiro básico|ELE|un|380
+ELE.13|Sistema fotovoltaico 3kWp (painéis + inversor)|ELE|un|6800
+ELE.14|Sistema fotovoltaico 5kWp|ELE|un|9500
+ELE.15|Carregador EV monofásico 7,4kW|ELE|un|1200
+ITE.01|Passagem de caixilharia ITED (caixa + calha)|ITED|un|85
+ITE.02|Tomada TV+TEL+DADOS RJ45|ITED|un|45
+ITE.03|Caixa ITED individual (ATI)|ITED|un|320
+ITE.04|Caixa ITED colectiva (ATE)|ITED|un|580
+ITE.05|Cabo coaxial RG6 (instalação)|ITED|m|4.5
+ITE.06|Router/switch instalação e config.|ITED|un|180
+AVA.01|Split 9000 BTU (A+++) fornecimento + install.|AVAC|un|1200
+AVA.02|Split 12000 BTU (A+++)|AVAC|un|1450
+AVA.03|Split 18000 BTU (A+++)|AVAC|un|1850
+AVA.04|Multi-split 3×9000 BTU|AVAC|un|3200
+AVA.05|VRF sistema comercial (por kW frio)|AVAC|kW|480
+AVA.06|VMC simples fluxo (fornecimento + install.)|AVAC|un|950
+AVA.07|VMC duplo fluxo com recuperação de calor|AVAC|un|2800
+AVA.08|Piso radiante eléctrico (por m²)|AVAC|m²|65
+AVA.09|Piso radiante hidráulico (por m²)|AVAC|m²|85
+GAS.01|Ramal gás natural DN25 (rua → contador)|GAS|un|680
+GAS.02|Tubagem cobre D15 instalação interior|GAS|m|18
+GAS.03|Tubagem cobre D22|GAS|m|22
+GAS.04|Caldeira gás natural c/acumulação 24kW|GAS|un|1800
+GAS.05|Caldeira condensação 24kW (A+)|GAS|un|2400
+GAS.06|Lareira a gás (encastrar)|GAS|un|3200
+SCI.01|Detector de fumo (inc. ligação)|SCIE|un|85
+SCI.02|Sirene interior|SCIE|un|120
+SCI.03|Central de incêndio (até 8 zonas)|SCIE|un|1800
+SCI.04|Extintor pó ABC 6kg (fornecimento + suporte)|SCIE|un|65
+SCI.05|Boca de incêndio armada DN25|SCIE|un|480
+SCI.06|Sprinkler residencial (por cabeça)|SCIE|un|120
+TER.01|Isolamento XPS 50mm em cobertura plana|TERM|m²|22
+TER.02|Isolamento XPS 80mm em cobertura plana|TERM|m²|28
+TER.03|Isolamento MW 50mm em paredes (caixa-de-ar)|TERM|m²|12
+TER.04|Isolamento acústico pavimento (betão celular 5cm)|ACU|m²|18
+TER.05|Isolamento acústico tecto falso (MW 40mm)|ACU|m²|15
+CAR.01|Roupeiro embutido MDF lacado (por metro linear)|CARP|m|850
+CAR.02|Cozinha MDF lacado (por metro linear)|CARP|m|1200
+CAR.03|Casa de banho em MDF lacado (móvel+lavatório)|CARP|un|680
+CAR.04|Escada em madeira maciça (por degrau)|CARP|un|280
+CAR.05|Soalho madeira maciça (colocação)|CARP|m²|45

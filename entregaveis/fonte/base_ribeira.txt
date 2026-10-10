@@ -1,0 +1,32 @@
+ARQ|Demolição de parede interior em alvenaria existente, c/ ensacamento manual, transporte à mão e remoção a vazadouro|m²|55
+HID|Remoção de loiças sanitárias existentes (desmontagem cuidada, corte de ligações, transporte)|vg|200
+ARQ|Abertura e fecho de vãos em alvenaria rebocada, incl. lintéis e regularização|un|480
+ARQ|Parede em pladur standard BA13 c/ estrutura metálica galvanizada, juntas tratadas, pronta a pintar|m²|58
+ARQ|Revestimento cerâmico em paredes de WC (fornecimento e aplicação), cimento-cola C2TES1 e betumação|m²|52
+ARQ|Pladur hidrófugo H1 em zonas húmidas (paredes)|m²|50
+ARQ|Impermeabilização com argamassa bicomponente (tipo Weber 824) em pavimento e zona de duche|m²|28
+ARQ|Pavimento cerâmico em WC (fornecimento e aplicação), cimento-cola C2TES1 e betumação|m²|52
+ARQ|Teto falso em pladur BA13 c/ estrutura suspensa, nivelamento e juntas|m²|62
+ARQ|Teto falso em pladur hidrófugo H1 em zonas húmidas|m²|55
+ARQ|Pintura de paredes e tetos: primário + 2 demãos de tinta acrílica lavável|m²|20
+ARQ|OSB 10 mm para reforço da base de pavimento flutuante|m²|48
+ARQ|Pavimento laminado AC4 Classe 32, 8 mm, click, c/ manta acústica e remates|m²|54
+CARP|Rodapé MDF hidrófugo lacado branco 100 mm|m|11
+CARP|Recuperação de porta interior existente (lixagem, reparação, ferragens, acabamento)|un|210
+HID|Conjunto sanita + autoclismo + assento (gama média)|un|340
+HID|Móvel WC 58x48 cm c/ lavatório de pousar e bancada|un|590
+HID|Base de duche em resina antiderrapante 70x120 cm|un|460
+HID|Resguardo frontal de duche 120x185 cm vidro transparente|un|510
+HID|Torneira de lavatório (gama média)|un|100
+HID|Chuveiro c/ bicha e rampa telescópica|un|120
+HID|Rede de águas quente e fria em multicamada (1 WC), incl. acessórios, isolamento e ligações|vg|1850
+ESG|Rede de drenagem doméstica em PVC série reforçada (1 WC), incl. caixas sifonadas|vg|1250
+HID|Válvulas, sifões, flexíveis e acessórios de acabamento (1 WC)|vg|380
+HID|Ensaios de estanquidade e colocação em funcionamento|vg|200
+ELE|Instalação elétrica embebida (apartamento), tubagem VD, caixas, cablagem e aparelhagem|vg|3400
+ELE|Aparelhagem elétrica (tipo EFAPEL), cor branca, fornecimento e instalação|un|32
+ELE|Iluminação LED encastrada em teto falso|un|44
+ELE|Circuito dedicado para instalações sanitárias e equipamentos|vg|420
+ELE|Revisão e adaptação de quadro elétrico existente (diferencial e disjuntores)|vg|500
+GER|Estaleiro: proteções de pavimentos e superfícies, sinalização, condicionamento de acessos (obra pequena)|vg|350
+GER|Limpeza final de obra e entrega em condições de habitabilidade (obra pequena)|vg|500

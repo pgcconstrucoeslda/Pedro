@@ -79,6 +79,12 @@ with st.sidebar.expander("Parâmetros", expanded=False):
     tol_al = st.number_input("Tolerância ALERTA [%]", 0.0, 100.0, 10.0, 0.5)
     ignorar = st.text_input("Layers a ignorar (regex)", "", help="Ex.: veget|arvore|topo")
     perfis_path = st.text_input("Ficheiro do registo de projetistas", str(Registo().caminho))
+    f_perf = st.file_uploader("Importar registo de projetistas (JSON)", type=["json"],
+                              help="Junta os perfis de outro computador/sessão aos atuais.")
+    if f_perf is not None and st.session_state.get("perfis_importados") != f_perf.name + str(f_perf.size):
+        n, m = Registo(perfis_path).importar(f_perf.getvalue().decode("utf-8"))
+        st.session_state["perfis_importados"] = f_perf.name + str(f_perf.size)
+        st.success(f"Registo importado: {n} perfis novos, {m} fundidos.")
 
 ss = st.session_state
 for k, v in {"mq": None, "mq_av": [], "mq_meta": {}, "regras_base": None, "regras": None, "sug_av": []}.items():

@@ -4,7 +4,16 @@ Aplicação web que lê desenhos DWG/DXF, faz medições automáticas (áreas, p
 contagens e grandezas derivadas) e compara-as com o Mapa de Quantidades (MQ) da obra, com
 **rastreabilidade** de cada valor até à entidade do desenho (*handle*).
 
-## Instalação
+## Instalação rápida no Windows
+
+1. Instale o **Python 3.10+** (marque «Add python.exe to PATH») e o **ODA File Converter**.
+2. Descarregue o ZIP deste ramo (Code → Download ZIP) e descompacte, por exemplo, em `C:\Medicoes`.
+3. Duplo clique em **`instalar.bat`** (cria o ambiente, instala as bibliotecas e um atalho no ambiente de trabalho).
+4. Para usar: atalho **«Medições DWG x MQ»** ou **`iniciar.bat`**.
+
+Guia completo (com imagens): [`docs/Guia_Utilizacao_Medicoes_DWG_MQ.docx`](docs/Guia_Utilizacao_Medicoes_DWG_MQ.docx).
+
+## Instalação (manual / outros sistemas)
 
 ```bash
 pip install -r requirements.txt

@@ -12,3 +12,4 @@ __pycache__/
 perfis/
 saidas/
 *.docx
+!docs/*.docx

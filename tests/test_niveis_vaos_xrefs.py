@@ -107,3 +107,15 @@ def test_registo_projetistas(tmp_path):
     assert Registo(tmp_path / "perfis.json").get(p1["id"])["blocos_conhecidos"]["lavatorio"] == ["A$C0BD9282B"]
     alvo = reg.associar_documento("mq.xls", {"ultimo_a_guardar": "Fulano | XYZ & Associados"})
     assert alvo["nome"] == "XYZ & Associados"
+
+
+def test_importar_registo(tmp_path):
+    a, b = Registo(tmp_path / "a.json"), Registo(tmp_path / "b.json")
+    r = extrair(str(_projeto(tmp_path, "LayoutXYZ")))
+    a.identificar(r, "x1.dwg")
+    a.ensinar_bloco("P001", "sanita", "WC1")
+    n, m = b.importar(a.to_json())
+    assert (n, m) == (1, 0)
+    n, m = b.importar(a.to_json())
+    assert (n, m) == (0, 1)
+    assert b.perfis[0]["blocos_conhecidos"]["sanita"] == ["WC1"]

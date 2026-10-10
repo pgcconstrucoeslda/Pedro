@@ -155,6 +155,35 @@ class Registo:
         self.caminho.write_text(json.dumps({"atualizado": _agora(), "perfis": self.perfis}, ensure_ascii=False, indent=2),
                                 encoding="utf-8")
 
+    def importar(self, texto: str, guardar: bool = True) -> tuple[int, int]:
+        """Junta perfis de outro registo (ex.: do PC para uma sessão, ou vice-versa).
+        Perfis com o mesmo gabinete ou a mesma assinatura são fundidos. Devolve (novos, fundidos)."""
+        outros = json.loads(texto).get("perfis", [])
+        novos = fundidos = 0
+        for o in outros:
+            alvo = next((p for p in self.perfis if (o.get("gabinete") and p.get("gabinete")
+                                                    and o["gabinete"].lower() == p["gabinete"].lower())
+                         or (set(o.get("blocos_legenda", [])) & set(p.get("blocos_legenda", [])))
+                         or (o.get("prefixos_layers") and o.get("prefixos_layers") == p.get("prefixos_layers"))), None)
+            if alvo is None:
+                o = dict(o, id=f"P{len(self.perfis) + 1:03d}")
+                self.perfis.append(o)
+                novos += 1
+                continue
+            for k in ("especialidades", "autores", "blocos_legenda", "prefixos_layers", "padroes_ficheiro"):
+                alvo[k] = sorted(set(alvo.get(k, [])) | set(o.get(k, [])))
+            for k in ("layers_conhecidos", "blocos_conhecidos"):
+                for papel, v in o.get(k, {}).items():
+                    alvo.setdefault(k, {})[papel] = sorted(set(alvo[k].get(papel, [])) | set(v))
+            fich = {p["ficheiro"] for p in alvo.get("projetos", [])}
+            alvo["projetos"] = alvo.get("projetos", []) + [p for p in o.get("projetos", []) if p["ficheiro"] not in fich]
+            if o.get("gabinete") and not alvo.get("gabinete"):
+                alvo["gabinete"], alvo["nome"] = o["gabinete"], o.get("nome", o["gabinete"])
+            fundidos += 1
+        if guardar:
+            self.guardar()
+        return novos, fundidos
+
     def to_json(self) -> str:
         return json.dumps({"atualizado": _agora(), "perfis": self.perfis}, ensure_ascii=False, indent=2)
 

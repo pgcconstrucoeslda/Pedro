@@ -1,0 +1,205 @@
+#GER|Gerais e Estaleiro
+Estaleiro|Montagem, manutenção e desmontagem do estaleiro (instalações, vedação, sinalização)|A|MQ|Alta|MQ
+Estaleiro|Ligações provisórias de água, eletricidade e esgoto de obra e respetivos consumos|A|MQ|Média|MQ
+Estaleiro|Andaimes e plataformas de trabalho para fachadas e cobertura|A|MQ|Alta|MQ
+Estaleiro|Meios de elevação (grua/monta-cargas) e licença de ocupação da via pública|A|MQ|Média|MQ
+Estaleiro|Implantação topográfica e piquetagem da obra|N|MQ|Média|MQ
+Segurança e ambiente|Implementação do Plano de Segurança e Saúde (EPC, sinalização, proteções coletivas)|A|MQ / CTE|Média|MQ
+Segurança e ambiente|Plano de Prevenção e Gestão de RCD, triagem, transporte e deposição em operador licenciado|A|MQ|Alta|MQ
+Segurança e ambiente|Proteção de construções vizinhas, vistoria prévia e registo fotográfico|A|MQ / MD|Média|MQ
+Finalização|Limpezas periódicas e limpeza final da obra|A|MQ|Baixa|MQ
+Finalização|Telas finais, compilação técnica e manuais de utilização e manutenção|A|MQ / CTE|Média|MQ
+Coerência documental|Descrições e unidades do MQ coerentes com a memória descritiva e o caderno de encargos|A|MQ / CTE / MD|Alta|C
+Coerência documental|Todas as especialidades desenvolvidas sobre a mesma revisão de arquitetura|A|Legendas dos desenhos|Alta|C
+Coerência documental|Critérios de medição definidos e coerentes com as unidades do MQ|A|MQ / CTE|Média|P
+#DEM|Demolições e Trabalhos Preparatórios
+Levantamento|Levantamento do existente e planta de demolições/construções (amarelos e vermelhos)|R|Peças desenhadas|Alta|P
+Levantamento|Diagnóstico e tratamento de patologias existentes (humidade ascensional, infiltrações, fissuras)|R|MD / MQ|Alta|P
+Demolições|Demolição de paredes com confirmação de que não são resistentes (ou solução de reforço)|R|Arquitetura × Estruturas|Alta|C
+Demolições|Escoramentos provisórios durante as demolições e aberturas de vãos|R|MQ / Estruturas|Alta|MQ
+Demolições|Remoção de revestimentos de pavimentos, paredes e tetos até à base|R|MQ|Média|MQ
+Demolições|Remoção de caixilharias, portas, loiças sanitárias e móveis de cozinha existentes|R|MQ|Baixa|MQ
+Demolições|Desativação e remoção das redes existentes (água, esgoto, eletricidade, gás)|R|MQ|Média|MQ
+Demolições|Identificação e remoção de materiais com amianto (ex.: fibrocimento) por empresa habilitada|R|MD / MQ|Alta|MQ
+Preparação|Picagem, regularização e reparação de suportes após as demolições|R|MQ|Média|MQ
+Preparação|Elementos a manter e proteger durante a obra (cantarias, pavimentos, carpintarias)|R|MD / MQ|Média|MQ
+Preparação|Proteção de zonas ocupadas e mobiliário, se a habitação se mantiver habitada|R|MQ|Baixa|MQ
+#MTF|Movimento de Terras e Fundações
+Estudos|Estudo geotécnico existente e coerente com a solução de fundações adotada|N|Estruturas / MD|Alta|P
+Escavações|Desmatação e decapagem de terra vegetal (e armazenamento para reutilização)|N|MQ|Média|MQ
+Escavações|Escavação geral e de caboucos, distinguindo terreno brando e rocha|N|MQ|Alta|MQ
+Escavações|Contenção periférica/entivação e proteção de muros e fundações de vizinhos|N|MQ / Estruturas|Alta|MQ
+Escavações|Rebaixamento do nível freático e bombagem|N|MQ|Média|MQ
+Escavações|Transporte de terras sobrantes a vazadouro e respetivas taxas|N|MQ|Alta|MQ
+Aterros|Aterros com material selecionado, compactação e ensaios de compactação|N|MQ|Média|MQ
+Aterros|Caixa de brita/enrocamento e membrana sob lajes térreas|N|MQ|Média|MQ
+Fundações|Betão de limpeza sob sapatas e vigas de fundação|N|MQ|Baixa|MQ
+Drenagem|Drenagem periférica de fundações e muros (tubo dreno, geotêxtil, brita)|N|MQ / Pluviais|Alta|MQ
+Valas|Valas para redes enterradas (escavação, almofada de areia, aterro e reposição de pavimento)|A|MQ|Média|MQ
+#EST|Estruturas
+Materiais|Classes de betão, aço e de exposição ambiental definidas e iguais nos desenhos e no MQ|A|Estruturas / MQ|Média|P
+Quantidades|Volumes de betão por elemento (sapatas, vigas, pilares, lajes, muros) conferidos com os desenhos|A|MQ × Desenhos|Alta|MQ
+Quantidades|Taxa de armadura (kg/m³) plausível por tipo de elemento|A|MQ|Média|MQ
+Quantidades|Cofragens medidas, incluindo cofragem perdida e faces de betão à vista|A|MQ|Média|MQ
+Quantidades|Escadas, patamares e rampas estruturais medidos|A|MQ|Média|MQ
+Quantidades|Lajes aligeiradas: tipo de vigota/abobadilha e lajeta de compressão coerentes entre peças|A|MQ × Desenhos|Média|MQ
+Quantidades|Lintéis/vergas sobre vãos em alvenaria|A|MQ|Média|MQ
+Muros|Muros de suporte com impermeabilização, drenagem e juntas previstas|N|MQ|Alta|MQ
+Compatibilização|Cotas coerentes entre arquitetura e estruturas (pés-direitos, espessura de laje + pavimento)|A|Arquitetura × Estruturas|Alta|C
+Compatibilização|Pilares e vigas que colidem com vãos, portas, escadas ou zonas de circulação|A|Arquitetura × Estruturas|Alta|C
+Compatibilização|Rebaixos de laje em casas de banho (duches à face), varandas e terraços|A|Arquitetura × Estruturas|Alta|C
+Compatibilização|Negativos/aberturas em lajes e vigas para tubos de queda, condutas e chaminés|A|Estruturas × Redes|Alta|C
+Compatibilização|Platibandas, palas, consolas e elementos de betão aparente presentes em ambas as especialidades|A|Arquitetura × Estruturas|Média|C
+Compatibilização|Maciços/bases para equipamentos (bomba de calor, depósitos, painéis solares)|A|Estruturas × AVAC|Média|C
+Metálicas|Estruturas metálicas: proteção anticorrosiva e ao fogo, ligações e chumbadouros|A|MQ|Média|MQ
+Reforço|Reforço de elementos existentes (pavimentos de madeira, lintéis em novas aberturas)|R|Estruturas / MQ|Alta|MQ
+Pormenores|Juntas de dilatação e respetivo tratamento|A|Estruturas / Arquitetura|Baixa|P
+Controlo|Ensaios de betão e controlo de qualidade|A|MQ|Baixa|MQ
+#ARQ|Arquitetura
+Alvenarias|Alvenarias exteriores e interiores por tipo/espessura, com dedução de vãos segundo o critério de medição|A|MQ|Alta|MQ
+Alvenarias|Correção de pontes térmicas em topos de laje, pilares e vigas|A|Arquitetura × Térmica|Alta|C
+Alvenarias|Divisórias em gesso cartonado: estrutura, isolamento e placas hidrófugas em zonas húmidas|A|MQ|Média|MQ
+Alvenarias|Reforços para suspensão de móveis e loiças suspensas em paredes de gesso cartonado|A|MQ|Baixa|MQ
+Revestimentos|Rebocos/estuques em todas as faces de paredes e tetos (interiores e exteriores)|A|MQ|Alta|MQ
+Revestimentos|Tetos falsos e sancas, incluindo alçapões de visita|A|MQ|Média|MQ
+Revestimentos|Betonilhas de regularização/enchimento com espessura coerente com o pavimento final|A|MQ|Alta|MQ
+Revestimentos|Rodapés, soleiras, peitoris e capeamentos|A|MQ|Média|MQ
+Revestimentos|Perfis de remate, cantoneiras e juntas em cerâmicos e pedra|A|MQ|Baixa|MQ
+Revestimentos|Revestimento de escadas (cobertor, espelho, rodapé, focinho antiderrapante)|A|MQ|Média|MQ
+Revestimentos|Mapa de acabamentos coerente com as plantas e o MQ|A|Arquitetura × MQ|Alta|C
+Impermeabilizações|Coberturas planas e terraços, incluindo remates em platibandas, soleiras e rufos|A|MQ|Alta|MQ
+Impermeabilizações|Zonas de duche, bases de banheira e pavimentos de casas de banho|A|MQ|Alta|MQ
+Impermeabilizações|Paredes enterradas e lajes térreas|N|MQ|Alta|MQ
+Impermeabilizações|Varandas e floreiras|A|MQ|Alta|MQ
+Impermeabilizações|Barreira contra humidade ascensional na base das paredes|A|MQ|Média|MQ
+Coberturas|Cobertura inclinada: estrutura, subtelha/membrana, ripado, telha, cumeeiras e beirados|A|MQ|Alta|MQ
+Coberturas|Rufos, caleiras, algerozes e tubos de queda|A|MQ × Pluviais|Alta|MQ
+Coberturas|Isolamento térmico da cobertura com espessura igual à do estudo térmico|A|Arquitetura × Térmica|Alta|C
+Coberturas|Pendentes e enchimentos de coberturas planas|A|MQ|Média|MQ
+Coberturas|Acesso à cobertura (alçapão, escada) e linha de vida para manutenção|A|MQ|Média|MQ
+Coberturas|Atravessamentos da cobertura (ventilação, exaustão, chaminés, solares) com remates|A|Arquitetura × AVAC|Alta|C
+Fachadas|ETICS: isolamento, rede, perfis de arranque, cantoneiras e reforços nos cantos dos vãos|A|MQ|Alta|MQ
+Fachadas|Fachada ventilada/revestimento pétreo: subestrutura e fixações|A|MQ|Média|MQ
+Fachadas|Pinturas exteriores com primário adequado ao suporte|A|MQ|Média|MQ
+Vãos|Mapa de vãos coerente com plantas, alçados e cortes (quantidades, dimensões, sentidos de abertura)|A|Arquitetura|Alta|C
+Vãos|Caixilharias com Uw, vidro e classe de permeabilidade iguais às da térmica e da acústica|A|Arquitetura × Térmica × Acústica|Alta|C
+Vãos|Sombreamentos (estores, caixas de estore, motorização) e respetiva alimentação elétrica|A|Arquitetura × Eletricidade|Média|C
+Vãos|Pré-aros, tratamento perimetral dos vãos e peitoris com pingadeira|A|MQ|Média|MQ
+Vãos|Portas interiores (aros, guarnições, ferragens) e porta de entrada de segurança|A|MQ|Média|MQ
+Vãos|Grelhas de admissão de ar em caixilharias ou paredes|A|Arquitetura × AVAC|Média|C
+Carpintarias e serralharias|Cozinha (móveis, bancada, eletrodomésticos) e roupeiros: incluídos ou excluídos explicitamente|A|MQ / CTE|Alta|MQ
+Carpintarias e serralharias|Guardas de escadas, varandas e terraços com altura regulamentar|A|MQ|Alta|MQ
+Carpintarias e serralharias|Corrimãos|A|MQ|Baixa|MQ
+Carpintarias e serralharias|Portões, vedações e caixa de correio|N|MQ|Média|MQ
+Pinturas|Pintura interior de paredes e tetos (incluindo tetos falsos)|A|MQ|Média|MQ
+Pinturas|Envernizamento/lacagem de carpintarias e tratamento de elementos metálicos|A|MQ|Baixa|MQ
+Equipamento sanitário|Loiças, bases de duche, resguardos e torneiras (marca/gama ou valor de referência)|A|MQ|Alta|MQ
+Equipamento sanitário|Acessórios de casa de banho e espelhos|A|MQ|Baixa|MQ
+Diversos|Pé-direito mínimo regulamentar garantido após teto falso e condutas|A|Arquitetura × AVAC|Média|C
+Diversos|Quadro de áreas coerente com as plantas|A|Arquitetura|Média|C
+Diversos|Lareira/recuperador: conduta de fumos, remate na cobertura e ar de combustão|A|MQ|Média|MQ
+#AAG|Águas (Abastecimento)
+Ligação|Ramal de ligação à rede pública, nicho/contador e taxas da entidade gestora|N|MQ|Alta|MQ
+Rede|Rede de água fria e quente com traçado e diâmetros definidos|A|Águas|Média|P
+Rede|Isolamento térmico das tubagens de água quente (e retorno)|A|MQ|Média|MQ
+Rede|Rede de retorno de AQS, quando a distância ao produtor o justifique|A|Águas × AVAC|Média|C
+Rede|Válvulas de seccionamento por compartimento/zona|A|MQ|Baixa|MQ
+Rede|Redutor de pressão e filtro na entrada da instalação|A|MQ|Baixa|MQ
+Pontos de utilização|Pontos de água para todos os equipamentos (máquinas, frigorífico, torneiras de jardim)|A|Arquitetura × Águas|Média|C
+Equipamentos|Produção de AQS (bomba de calor/solar térmico) ligada à rede e coerente com a térmica|A|Águas × AVAC × Térmica|Alta|C
+Equipamentos|Grupo hidropressor/reservatório, quando necessário|A|MQ|Média|MQ
+Exterior|Rede de rega|N|MQ|Baixa|MQ
+Ensaios|Ensaios de estanquidade e desinfeção da rede|A|MQ|Baixa|MQ
+#ESG|Esgotos Domésticos
+Ligação|Ramal de ligação à rede pública e câmara de ramal|N|MQ|Alta|MQ
+Ligação|Estação elevatória, se a soleira estiver abaixo do coletor público|A|Esgotos|Alta|P
+Ligação|Fossa séptica/ETAR compacta e órgão de infiltração (sem rede pública)|N|Esgotos|Alta|P
+Compatibilização|Tubos de queda compatíveis com estrutura e arquitetura (atravessamento de vigas/lajes)|A|Estruturas × Esgotos|Alta|C
+Compatibilização|Inclinações dos coletores compatíveis com espessuras de pavimento/teto falso|A|Arquitetura × Esgotos|Alta|C
+Compatibilização|Ventilação primária dos tubos de queda prolongada até à cobertura|A|Esgotos × Arquitetura|Média|C
+Compatibilização|Isolamento acústico dos tubos de queda junto a compartimentos habitáveis|A|Esgotos × Acústica|Média|C
+Rede|Caixas de visita e de pavimento|A|MQ|Média|MQ
+Rede|Ralos e sifões em zonas húmidas, lavandaria e garagem|A|MQ|Média|MQ
+Rede|Câmara retentora de gorduras (se aplicável)|A|MQ|Baixa|MQ
+Ensaios|Ensaios de estanquidade|A|MQ|Baixa|MQ
+#PLU|Águas Pluviais
+Ligação|Destino final definido (rede pública, valeta, poço absorvente)|N|Pluviais|Alta|P
+Ligação|Sistema separativo doméstico/pluvial garantido em toda a rede|A|Pluviais × Esgotos|Alta|C
+Rede|Caleiras, tubos de queda e ralos de coberturas planas com tubos ladrão|A|MQ|Alta|MQ
+Rede|Ralos/grelhas em terraços, varandas, rampas de garagem e pátios|A|MQ|Média|MQ
+Rede|Caixas de areia e de visita pluviais|A|MQ|Média|MQ
+Compatibilização|Tubos de queda iguais em número e posição nas plantas e alçados de arquitetura|A|Arquitetura × Pluviais|Média|C
+Compatibilização|Drenagem de muros de suporte ligada à rede pluvial|N|Estruturas × Pluviais|Média|C
+Aproveitamento|Aproveitamento de águas pluviais (cisterna), se previsto|A|MQ|Baixa|MQ
+#ELE|Eletricidade
+Alimentação|Portinhola, contador, ramal e pedido de ligação ao distribuidor|N|MQ|Alta|MQ
+Alimentação|Quadro elétrico com proteções e espaço de reserva|A|MQ|Média|MQ
+Terras|Elétrodo de terra e ligações equipotenciais (casas de banho, estruturas metálicas)|A|MQ|Alta|MQ
+Quantidades|Contagem de pontos de luz e tomadas nas plantas igual à do MQ|A|MQ × Desenhos|Alta|MQ
+Quantidades|Luminárias: incluídas ou excluídas, com tipologia e quantidades|A|MQ / CTE|Alta|MQ
+Quantidades|Tubagem e caixas, incluindo tubagem embebida em laje antes da betonagem|A|Eletricidade × Estruturas|Média|C
+Compatibilização|Alimentação dos equipamentos AVAC (bomba de calor, VMC, ventiladores)|A|Eletricidade × AVAC|Alta|C
+Compatibilização|Alimentação de estores motorizados, portões automáticos e videoporteiro|A|Eletricidade × Arquitetura|Média|C
+Compatibilização|Posição de tomadas e interruptores compatível com cozinha, mobiliário e portas|A|Eletricidade × Arquitetura|Média|C
+Compatibilização|Iluminação de emergência e sinalização, se exigidas pela SCIE|A|Eletricidade × SCIE|Baixa|C
+Exterior|Iluminação exterior e tomadas exteriores estanques|A|MQ|Média|MQ
+Renováveis|Posto de carregamento de veículo elétrico (ou pré-instalação)|N|MQ|Média|MQ
+Renováveis|Fotovoltaico/autoconsumo (painéis, inversor, estrutura) coerente com a térmica|A|Eletricidade × Térmica|Média|C
+Existente|Desativação e substituição integral da instalação existente|R|MQ|Média|MQ
+Certificação|Certificação/inspeção da instalação por entidade inspetora|A|MQ|Média|MQ
+#ITE|ITED
+Entrada|Caixa de visita multioperador e tubagem enterrada até à via pública|N|MQ|Média|MQ
+Entrada|ATE/ATI e respetiva alimentação elétrica|A|ITED × Eletricidade|Média|C
+Quantidades|Tomadas RJ45/coaxial/fibra por compartimento iguais nas plantas e no MQ|A|MQ × Desenhos|Média|MQ
+Captação|Sistema de captação de TV (antena/mastro) e passagem para a cobertura|A|ITED × Arquitetura|Baixa|C
+Certificação|Ensaios e certificação ITED por instalador habilitado|A|MQ|Média|MQ
+#GAS|Gás
+Opção|Existência de gás ou solução all-electric igual em todas as especialidades|A|Gás × AVAC × Térmica|Alta|C
+Ligação|Ramal, armário de contador ou reservatório de GPL e respetivo licenciamento|A|MQ|Média|MQ
+Rede|Traçado da tubagem com proteções e bainhas nos atravessamentos|A|MQ|Média|MQ
+Ventilação|Ventilação dos compartimentos com aparelhos a gás e evacuação dos produtos de combustão|A|Gás × AVAC × Arquitetura|Alta|C
+Certificação|Inspeção e certificação da instalação de gás|A|MQ|Média|MQ
+#AVA|AVAC e Ventilação
+Sistema|Sistema de climatização (piso radiante, radiadores, splits) igual ao do estudo térmico|A|AVAC × Térmica|Alta|C
+Ventilação|Exaustão de cozinha e casas de banho com saída definida à cobertura/fachada|A|AVAC × Arquitetura|Alta|C
+Ventilação|Exaustor de cozinha e conduta de exaustão até ao exterior|A|MQ|Média|MQ
+Ventilação|VMC: equipamento, condutas, bocas e isolamento|A|MQ|Média|MQ
+Ventilação|Passagem de ar nas portas interiores (folga inferior ou grelha)|A|AVAC × Arquitetura|Baixa|C
+Compatibilização|Condutas compatíveis com vigas e altura disponível no teto falso|A|AVAC × Estruturas × Arquitetura|Alta|C
+Compatibilização|Unidades exteriores com localização, acesso, ruído e suporte definidos|A|AVAC × Arquitetura × Acústica|Média|C
+Compatibilização|Drenagem de condensados ligada à rede|A|AVAC × Esgotos|Média|C
+Compatibilização|Espessura do piso radiante compatível com betonilhas e cotas de pavimento|A|AVAC × Arquitetura|Alta|C
+Controlo|Termóstatos e controlo por zona|A|MQ|Baixa|MQ
+Ensaios|Ensaios, colocação em serviço e afinação|A|MQ|Baixa|MQ
+#TER|Térmica (SCE)
+Envolvente|Soluções construtivas do estudo térmico (U de paredes, coberturas, pavimentos) iguais às da arquitetura e do MQ|A|Térmica × Arquitetura|Alta|C
+Envolvente|Tipo e espessura de isolamento iguais em todos os documentos|A|Térmica × MQ|Alta|C
+Envolvente|Isolamento de pavimentos sobre espaços não aquecidos/exterior e de lajes térreas|A|MQ|Média|MQ
+Vãos|Fator solar dos vidros e sombreamentos iguais aos do mapa de vãos|A|Térmica × Arquitetura|Média|C
+Sistemas|Sistemas técnicos do pré-certificado (AQS, renováveis, climatização) existem nos projetos e no MQ|A|Térmica × AVAC × Águas|Alta|C
+Certificação|Pré-certificado e certificado energético final|A|MQ|Baixa|MQ
+Certificação|Ensaio de estanquidade ao ar (se previsto)|A|MQ|Baixa|MQ
+#ACU|Acústica
+Envolvente|Soluções acústicas (fachada, vãos, paredes e lajes de separação) refletidas na arquitetura e no MQ|A|Acústica × Arquitetura|Média|C
+Envolvente|Isolamento a sons de percussão (subpavimento/laje flutuante)|A|Acústica × Arquitetura|Média|C
+Envolvente|Caixas de estore e grelhas de ventilação com desempenho acústico|A|Acústica × Arquitetura|Baixa|C
+Equipamentos|Isolamento de vibrações e ruído de equipamentos (bombas de calor, ventiladores, hidropressores)|A|Acústica × AVAC|Média|C
+Ensaios|Ensaios acústicos finais (se exigidos)|A|MQ|Baixa|MQ
+#SCI|SCIE
+Projeto|Categoria de risco e medidas de segurança contra incêndio definidas (projeto ou ficha)|A|SCIE|Média|P
+Compartimentação|Portas e paredes com resistência ao fogo entre garagem e habitação|A|SCIE × Arquitetura|Média|C
+Materiais|Reação ao fogo de revestimentos e isolamentos exteriores (ex.: ETICS)|A|SCIE × Arquitetura|Média|C
+Equipamentos|Extintores, sinalética e iluminação de emergência (garagem, áreas técnicas)|A|MQ|Baixa|MQ
+Equipamentos|Deteção de incêndio/CO em garagem ou zonas com combustão|A|MQ|Baixa|MQ
+#EXT|Arranjos Exteriores
+Pavimentos|Pavimentos exteriores (acessos, estacionamento, passeios) com base e lancis|N|MQ|Média|MQ
+Pavimentos|Rebaixamento de lancil e reposição de pavimentos na via pública|N|MQ|Média|MQ
+Vedações|Muros de vedação, muretes e portões|N|MQ|Média|MQ
+Ajardinamento|Terra vegetal, ajardinamento, plantações e rega|N|MQ|Baixa|MQ
+Piscina|Piscina: estrutura, impermeabilização, equipamento e casa das máquinas|A|MQ|Média|MQ
+Compatibilização|Cotas exteriores compatíveis com soleiras e com a drenagem|N|Arquitetura × Pluviais|Alta|C
+#LIC|Licenças e Documentação
+Taxas|Taxas e custos de ligação às redes (água, saneamento, eletricidade, gás, telecomunicações)|A|MQ / CTE|Média|MQ
+Licenciamento|Livro de obra, placa de licenciamento e comunicações à câmara|A|MQ|Baixa|MQ
+Documentação|Ficha técnica da habitação|N|MQ|Baixa|MQ
+Documentação|Inspeções e vistorias finais para autorização de utilização|A|MQ|Baixa|MQ

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+# ficheiros de projeto de clientes não devem ir para o repositório
+*.dwg
+*.dxf
+*.xls
+*.xlsx
+!tests/dados/*.dxf
+.streamlit/secrets.toml

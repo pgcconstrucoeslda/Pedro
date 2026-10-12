@@ -7,6 +7,10 @@ echo   Medicoes DWG x Mapa de Quantidades - Instalacao
 echo ============================================================
 echo.
 
+rem --- 0. Este ficheiro tem de estar na pasta da aplicacao ------
+if not exist "%~dp0app.py" goto :buscar_app
+if not exist "%~dp0requirements.txt" goto :buscar_app
+
 rem --- 1. Python ------------------------------------------------
 set "PY="
 where py >nul 2>&1 && set "PY=py -3"
@@ -73,6 +77,39 @@ echo   trabalho ou duplo clique em iniciar.bat
 echo ============================================================
 pause
 exit /b 0
+
+:buscar_app
+set "DEST=%USERPROFILE%\Medicoes"
+set "ZIP=%TEMP%\medicoes_app.zip"
+set "TMPX=%TEMP%\medicoes_app"
+echo [AVISO] Este instalar.bat nao esta dentro da pasta da aplicacao
+echo         ^(falta o app.py ou o requirements.txt nesta pasta^).
+echo.
+echo [..] A descarregar a aplicacao do GitHub para:
+echo      %DEST%
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+  "$ErrorActionPreference='Stop'; [Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12;" ^
+  "Invoke-WebRequest -UseBasicParsing 'https://codeload.github.com/pgcconstrucoeslda/Pedro/zip/refs/heads/claude/medicoes-dwg-mq' -OutFile '%ZIP%';" ^
+  "if (Test-Path '%TMPX%') { Remove-Item -Recurse -Force '%TMPX%' };" ^
+  "Expand-Archive -Force '%ZIP%' '%TMPX%';" ^
+  "$src = (Get-ChildItem '%TMPX%' -Directory | Select-Object -First 1).FullName;" ^
+  "New-Item -ItemType Directory -Force '%DEST%' | Out-Null;" ^
+  "Copy-Item -Recurse -Force (Join-Path $src '*') '%DEST%'"
+if errorlevel 1 goto :sem_download
+if not exist "%DEST%\instalar.bat" goto :sem_download
+echo [OK] Aplicacao descarregada. A continuar a instalacao a partir de %DEST%
+echo.
+call "%DEST%\instalar.bat"
+exit /b %errorlevel%
+
+:sem_download
+echo.
+echo [ERRO] Nao foi possivel descarregar a aplicacao automaticamente.
+echo        Faca manualmente: GitHub ^> pgcconstrucoeslda/Pedro ^> ramo claude/medicoes-dwg-mq
+echo        ^> Code ^> Download ZIP. Descompacte e execute o instalar.bat DENTRO dessa pasta.
+start "" "https://github.com/pgcconstrucoeslda/Pedro/tree/claude/medicoes-dwg-mq"
+pause
+exit /b 1
 
 :sem_python
 echo [AVISO] Python 3.10 ou superior nao encontrado.

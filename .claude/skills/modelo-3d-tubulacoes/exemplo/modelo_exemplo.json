@@ -1,0 +1,3316 @@
+{
+ "meta": {
+  "projeto": "Moradia unifamiliar (exemplo)",
+  "codigo": "EX-001",
+  "rev": "R00",
+  "data": "2026-10-16",
+  "escala": "1:50",
+  "folha": "MOD-3D-01",
+  "unidade": "m",
+  "origem": "Vértice externo SO do térreo (eixo das paredes exteriores) — EX-ARQ 02",
+  "rn": "RN = piso acabado do térreo = ±0,000 (EX-ARQ 05)",
+  "z_terreno": -0.15,
+  "cores": {
+   "HID-AF": "#1e88e5",
+   "SAN-ESG": "#8d5a2b",
+   "SAN-VENT": "#5f9e3a",
+   "DRE-PLU": "#0f9b8e",
+   "DRE-AC": "#8e44ad"
+  },
+  "cores_fonte": "Exemplo: paleta padrão",
+  "declividades": [
+   {
+    "sistema": "SAN-ESG",
+    "dn_min": 100,
+    "dn_max": 999,
+    "min": 0.01,
+    "max": 0.05,
+    "fonte": "EX-SAN 01 nota 3"
+   },
+   {
+    "sistema": "SAN-ESG",
+    "dn_min": 0,
+    "dn_max": 99,
+    "min": 0.02,
+    "max": 0.05,
+    "fonte": "EX-SAN 01 nota 3"
+   },
+   {
+    "sistema": "DRE-PLU",
+    "dn_min": 0,
+    "dn_max": 999,
+    "min": 0.01,
+    "max": 0.05,
+    "fonte": "EX-DRE 01 nota 1"
+   },
+   {
+    "sistema": "DRE-AC",
+    "dn_min": 0,
+    "dn_max": 999,
+    "min": 0.01,
+    "max": 0.05,
+    "fonte": "EX-DRE 02 nota 1"
+   }
+  ],
+  "tolerancia_continuidade": 0.01
+ },
+ "pranchas": [
+  {
+   "codigo": "EX-ARQ 02",
+   "disciplina": "ARQ",
+   "pavimento": "T",
+   "titulo": "Planta do Térreo",
+   "curto": "ARQ 02 · Planta Térreo",
+   "escala": "1:50",
+   "rev": "R02",
+   "data": "2026-02-01"
+  },
+  {
+   "codigo": "EX-ARQ 03",
+   "disciplina": "ARQ",
+   "pavimento": "S",
+   "titulo": "Planta do Superior",
+   "curto": "ARQ 03 · Planta Superior",
+   "escala": "1:50",
+   "rev": "R02",
+   "data": "2026-02-01"
+  },
+  {
+   "codigo": "EX-ARQ 05",
+   "disciplina": "ARQ",
+   "pavimento": "-",
+   "titulo": "Cortes AA e BB",
+   "curto": "ARQ 05 · Cortes",
+   "escala": "1:50",
+   "rev": "R01",
+   "data": "2026-01-15"
+  },
+  {
+   "codigo": "EX-ARQ 07",
+   "disciplina": "ARQ",
+   "pavimento": "-",
+   "titulo": "Quadro de esquadrias",
+   "curto": "ARQ 07 · Esquadrias",
+   "escala": "-",
+   "rev": "R00",
+   "data": "2026-01-15"
+  },
+  {
+   "codigo": "EX-HID 01",
+   "disciplina": "HID",
+   "pavimento": "T",
+   "titulo": "Água fria — Implantação e entrada",
+   "curto": "HID 01 · Entrada",
+   "escala": "1:100",
+   "rev": "R01",
+   "data": "2026-03-10"
+  },
+  {
+   "codigo": "EX-HID 02",
+   "disciplina": "HID",
+   "pavimento": "T",
+   "titulo": "Água fria — Planta do Térreo",
+   "curto": "HID 02 · Planta Térreo",
+   "escala": "1:50",
+   "rev": "R01",
+   "data": "2026-03-10"
+  },
+  {
+   "codigo": "EX-HID 04",
+   "disciplina": "HID",
+   "pavimento": "C",
+   "titulo": "Água fria — Cobertura e caixas",
+   "curto": "HID 04 · Cobertura",
+   "escala": "1:50",
+   "rev": "R01",
+   "data": "2026-03-10"
+  },
+  {
+   "codigo": "EX-HID 05",
+   "disciplina": "HID",
+   "pavimento": "S",
+   "titulo": "Água fria — Planta do Superior",
+   "curto": "HID 05 · Planta Superior",
+   "escala": "1:50",
+   "rev": "R01",
+   "data": "2026-03-10"
+  },
+  {
+   "codigo": "EX-HID 06",
+   "disciplina": "HID",
+   "pavimento": "-",
+   "titulo": "Isométricos dos banheiros",
+   "curto": "HID 06 · Isométricos",
+   "escala": "s/e",
+   "rev": "R01",
+   "data": "2026-03-10"
+  },
+  {
+   "codigo": "EX-SAN 01",
+   "disciplina": "SAN",
+   "pavimento": "T",
+   "titulo": "Esgoto — Planta do Térreo",
+   "curto": "SAN 01 · Planta Térreo",
+   "escala": "1:50",
+   "rev": "R00",
+   "data": "2026-03-12"
+  },
+  {
+   "codigo": "EX-SAN 02",
+   "disciplina": "SAN",
+   "pavimento": "S",
+   "titulo": "Esgoto — Planta do Superior",
+   "curto": "SAN 02 · Planta Superior",
+   "escala": "1:50",
+   "rev": "R00",
+   "data": "2026-03-12"
+  },
+  {
+   "codigo": "EX-SAN 03",
+   "disciplina": "SAN",
+   "pavimento": "-",
+   "titulo": "Esgoto — Colunas e ventilação",
+   "curto": "SAN 03 · Colunas",
+   "escala": "s/e",
+   "rev": "R00",
+   "data": "2026-03-12"
+  },
+  {
+   "codigo": "EX-DRE 01",
+   "disciplina": "DRE",
+   "pavimento": "T",
+   "titulo": "Pluvial — Planta",
+   "curto": "DRE 01 · Pluvial",
+   "escala": "1:100",
+   "rev": "R00",
+   "data": "2026-03-12"
+  },
+  {
+   "codigo": "EX-DRE 02",
+   "disciplina": "DRE",
+   "pavimento": "S",
+   "titulo": "Drenos de AC",
+   "curto": "DRE 02 · Drenos AC",
+   "escala": "1:50",
+   "rev": "R00",
+   "data": "2026-03-12"
+  }
+ ],
+ "pavimentos": [
+  {
+   "id": "T",
+   "nome": "Térreo",
+   "z_piso": 0.0,
+   "z_forro": 2.7,
+   "z_laje_fundo": 2.9,
+   "z_laje_topo": 3.05,
+   "fonte": "EX-ARQ 05 Corte AA"
+  },
+  {
+   "id": "S",
+   "nome": "Superior",
+   "z_piso": 3.1,
+   "z_forro": 5.8,
+   "z_laje_fundo": 6.0,
+   "z_laje_topo": 6.15,
+   "fonte": "EX-ARQ 05 Corte AA"
+  },
+  {
+   "id": "C",
+   "nome": "Cobertura",
+   "z_piso": 6.15,
+   "z_forro": null,
+   "z_laje_fundo": null,
+   "z_laje_topo": 6.15,
+   "fonte": "EX-ARQ 05 Corte AA"
+  }
+ ],
+ "niveis": [
+  {
+   "pav": "T",
+   "ambiente": "SALA",
+   "tipo": "piso",
+   "z": 0.0,
+   "fonte": "EX-ARQ 02",
+   "status": "EXTRAIDO"
+  },
+  {
+   "pav": "T",
+   "ambiente": "BWC01",
+   "tipo": "piso (rebaixado)",
+   "z": -0.02,
+   "fonte": "EX-ARQ 02 cota -0,02",
+   "status": "EXTRAIDO"
+  },
+  {
+   "pav": "T",
+   "ambiente": "Exterior",
+   "tipo": "terreno",
+   "z": -0.15,
+   "fonte": "EX-ARQ 01 implantação",
+   "status": "EXTRAIDO"
+  },
+  {
+   "pav": "S",
+   "ambiente": "(todos)",
+   "tipo": "piso",
+   "z": 3.1,
+   "fonte": "EX-ARQ 05 Corte AA",
+   "status": "EXTRAIDO"
+  },
+  {
+   "pav": "C",
+   "ambiente": "Caixa de água",
+   "tipo": "base",
+   "z": 6.25,
+   "fonte": "EX-HID 04 detalhe 1",
+   "status": "EXTRAIDO"
+  }
+ ],
+ "pisos": [
+  {
+   "id": "PS-T-01",
+   "pav": "T",
+   "ambiente": "SALA",
+   "tipo": "piso",
+   "z": 0.0,
+   "esp": 0.1,
+   "poly": [
+    [
+     0,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     0,
+     8
+    ]
+   ],
+   "fonte": "EX-ARQ 02"
+  },
+  {
+   "id": "PS-T-02",
+   "pav": "T",
+   "ambiente": "COZ",
+   "tipo": "piso",
+   "z": 0.0,
+   "esp": 0.1,
+   "poly": [
+    [
+     5,
+     0
+    ],
+    [
+     10,
+     0
+    ],
+    [
+     10,
+     4
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "fonte": "EX-ARQ 02"
+  },
+  {
+   "id": "PS-T-03",
+   "pav": "T",
+   "ambiente": "BWC01",
+   "tipo": "piso",
+   "z": -0.02,
+   "esp": 0.1,
+   "poly": [
+    [
+     5,
+     4
+    ],
+    [
+     10,
+     4
+    ],
+    [
+     10,
+     5.5
+    ],
+    [
+     7.5,
+     8
+    ],
+    [
+     5,
+     8
+    ]
+   ],
+   "fonte": "EX-ARQ 02 cota -0,02"
+  },
+  {
+   "id": "PS-S-01",
+   "pav": "S",
+   "ambiente": "Q1",
+   "tipo": "piso",
+   "z": 3.1,
+   "esp": 0.2,
+   "poly": [
+    [
+     0,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     0,
+     8
+    ]
+   ],
+   "fonte": "EX-ARQ 03"
+  },
+  {
+   "id": "PS-S-02",
+   "pav": "S",
+   "ambiente": "BWC02",
+   "tipo": "piso",
+   "z": 3.1,
+   "esp": 0.2,
+   "poly": [
+    [
+     5,
+     0
+    ],
+    [
+     10,
+     0
+    ],
+    [
+     10,
+     4
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "fonte": "EX-ARQ 03"
+  },
+  {
+   "id": "PS-S-03",
+   "pav": "S",
+   "ambiente": "Q2",
+   "tipo": "piso",
+   "z": 3.1,
+   "esp": 0.2,
+   "poly": [
+    [
+     5,
+     4
+    ],
+    [
+     10,
+     4
+    ],
+    [
+     10,
+     5.5
+    ],
+    [
+     7.5,
+     8
+    ],
+    [
+     5,
+     8
+    ]
+   ],
+   "fonte": "EX-ARQ 03"
+  },
+  {
+   "id": "PS-C-01",
+   "pav": "C",
+   "ambiente": "COB",
+   "tipo": "cobertura",
+   "z": 6.15,
+   "esp": 0.15,
+   "poly": [
+    [
+     0,
+     0
+    ],
+    [
+     10,
+     0
+    ],
+    [
+     10,
+     5.5
+    ],
+    [
+     7.5,
+     8
+    ],
+    [
+     0,
+     8
+    ]
+   ],
+   "fonte": "EX-ARQ 04"
+  }
+ ],
+ "ambientes": [
+  {
+   "id": "SALA",
+   "nome": "Sala",
+   "pav": "T",
+   "pos": [
+    2.5,
+    4.0
+   ]
+  },
+  {
+   "id": "COZ",
+   "nome": "Cozinha",
+   "pav": "T",
+   "pos": [
+    7.5,
+    2.0
+   ]
+  },
+  {
+   "id": "BWC01",
+   "nome": "Banheiro social",
+   "pav": "T",
+   "pos": [
+    6.8,
+    6.0
+   ]
+  },
+  {
+   "id": "Q1",
+   "nome": "Quarto 1",
+   "pav": "S",
+   "pos": [
+    2.5,
+    4.0
+   ]
+  },
+  {
+   "id": "BWC02",
+   "nome": "Banheiro suíte",
+   "pav": "S",
+   "pos": [
+    7.5,
+    2.0
+   ]
+  },
+  {
+   "id": "Q2",
+   "nome": "Quarto 2",
+   "pav": "S",
+   "pos": [
+    6.8,
+    6.0
+   ]
+  },
+  {
+   "id": "COB",
+   "nome": "Cobertura",
+   "pav": "C",
+   "pos": [
+    5.0,
+    6.5
+   ]
+  }
+ ],
+ "paredes": [
+  {
+   "id": "W-T-001",
+   "pav": "T",
+   "a": [
+    0,
+    0
+   ],
+   "b": [
+    10,
+    0
+   ],
+   "esp": 0.15,
+   "z0": -0.02,
+   "z1": 2.9,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-T-002",
+   "pav": "T",
+   "a": [
+    10,
+    0
+   ],
+   "b": [
+    10,
+    5.5
+   ],
+   "esp": 0.15,
+   "z0": -0.02,
+   "z1": 2.9,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-T-003",
+   "pav": "T",
+   "a": [
+    10,
+    5.5
+   ],
+   "b": [
+    7.5,
+    8
+   ],
+   "esp": 0.15,
+   "z0": -0.02,
+   "z1": 2.9,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-T-004",
+   "pav": "T",
+   "a": [
+    7.5,
+    8
+   ],
+   "b": [
+    0,
+    8
+   ],
+   "esp": 0.15,
+   "z0": -0.02,
+   "z1": 2.9,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-T-005",
+   "pav": "T",
+   "a": [
+    0,
+    8
+   ],
+   "b": [
+    0,
+    0
+   ],
+   "esp": 0.15,
+   "z0": -0.02,
+   "z1": 2.9,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-T-006",
+   "pav": "T",
+   "a": [
+    5,
+    0
+   ],
+   "b": [
+    5,
+    8
+   ],
+   "esp": 0.13,
+   "z0": -0.02,
+   "z1": 2.9,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-T-007",
+   "pav": "T",
+   "a": [
+    5,
+    4
+   ],
+   "b": [
+    10,
+    4
+   ],
+   "esp": 0.13,
+   "z0": -0.02,
+   "z1": 2.9,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-S-001",
+   "pav": "S",
+   "a": [
+    0,
+    0
+   ],
+   "b": [
+    10,
+    0
+   ],
+   "esp": 0.15,
+   "z0": 3.1,
+   "z1": 6.0,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-S-002",
+   "pav": "S",
+   "a": [
+    10,
+    0
+   ],
+   "b": [
+    10,
+    5.5
+   ],
+   "esp": 0.15,
+   "z0": 3.1,
+   "z1": 6.0,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-S-003",
+   "pav": "S",
+   "a": [
+    10,
+    5.5
+   ],
+   "b": [
+    7.5,
+    8
+   ],
+   "esp": 0.15,
+   "z0": 3.1,
+   "z1": 6.0,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-S-004",
+   "pav": "S",
+   "a": [
+    7.5,
+    8
+   ],
+   "b": [
+    0,
+    8
+   ],
+   "esp": 0.15,
+   "z0": 3.1,
+   "z1": 6.0,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-S-005",
+   "pav": "S",
+   "a": [
+    0,
+    8
+   ],
+   "b": [
+    0,
+    0
+   ],
+   "esp": 0.15,
+   "z0": 3.1,
+   "z1": 6.0,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-S-006",
+   "pav": "S",
+   "a": [
+    5,
+    0
+   ],
+   "b": [
+    5,
+    8
+   ],
+   "esp": 0.13,
+   "z0": 3.1,
+   "z1": 6.0,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-S-007",
+   "pav": "S",
+   "a": [
+    5,
+    4
+   ],
+   "b": [
+    10,
+    4
+   ],
+   "esp": 0.13,
+   "z0": 3.1,
+   "z1": 6.0,
+   "tipo": "parede",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  },
+  {
+   "id": "W-T-008",
+   "pav": "T",
+   "a": [
+    -2.5,
+    -3.0
+   ],
+   "b": [
+    11.0,
+    -3.0
+   ],
+   "esp": 0.15,
+   "z0": -0.15,
+   "z1": 1.8,
+   "tipo": "muro",
+   "fonte": "EX-ARQ 02 vetor (par paralelo)"
+  }
+ ],
+ "esquadrias": [
+  {
+   "id": "ESQ-01",
+   "ref": "P01",
+   "tipo": "porta",
+   "parede": "W-T-006",
+   "centro": [
+    5,
+    6.5
+   ],
+   "largura": 0.7,
+   "altura": 2.1,
+   "peitoril": 0,
+   "z_piso": 0.0,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-02",
+   "ref": "P02",
+   "tipo": "porta",
+   "parede": "W-T-006",
+   "centro": [
+    5,
+    2.0
+   ],
+   "largura": 0.8,
+   "altura": 2.1,
+   "peitoril": 0,
+   "z_piso": 0.0,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-03",
+   "ref": "P03",
+   "tipo": "porta",
+   "parede": "W-T-001",
+   "centro": [
+    2.5,
+    0
+   ],
+   "largura": 0.9,
+   "altura": 2.1,
+   "peitoril": 0,
+   "z_piso": 0.0,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-04",
+   "ref": "J01",
+   "tipo": "janela",
+   "parede": "W-T-001",
+   "centro": [
+    8.5,
+    0
+   ],
+   "largura": 1.2,
+   "altura": 1.0,
+   "peitoril": 1.1,
+   "z_piso": 0.0,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-05",
+   "ref": "J02",
+   "tipo": "janela",
+   "parede": "W-T-005",
+   "centro": [
+    0,
+    4.0
+   ],
+   "largura": 2.0,
+   "altura": 1.2,
+   "peitoril": 0.9,
+   "z_piso": 0.0,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-06",
+   "ref": "J03",
+   "tipo": "janela",
+   "parede": "W-T-004",
+   "centro": [
+    6.5,
+    8
+   ],
+   "largura": 0.6,
+   "altura": 0.6,
+   "peitoril": 1.6,
+   "z_piso": -0.02,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-07",
+   "ref": "J04",
+   "tipo": "janela",
+   "parede": "W-S-002",
+   "centro": [
+    10,
+    2.8
+   ],
+   "largura": 0.6,
+   "altura": 0.6,
+   "peitoril": 1.6,
+   "z_piso": 3.1,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-08",
+   "ref": "J05",
+   "tipo": "janela",
+   "parede": "W-S-004",
+   "centro": [
+    2.5,
+    8
+   ],
+   "largura": 1.5,
+   "altura": 1.2,
+   "peitoril": 0.9,
+   "z_piso": 3.1,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-09",
+   "ref": "J06",
+   "tipo": "janela",
+   "parede": "W-S-003",
+   "centro": [
+    8.75,
+    6.75
+   ],
+   "largura": 1.2,
+   "altura": 1.2,
+   "peitoril": 0.9,
+   "z_piso": 3.1,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-10",
+   "ref": "P04",
+   "tipo": "porta",
+   "parede": "W-S-006",
+   "centro": [
+    5,
+    6.0
+   ],
+   "largura": 0.8,
+   "altura": 2.1,
+   "peitoril": 0,
+   "z_piso": 3.1,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-11",
+   "ref": "P05",
+   "tipo": "porta",
+   "parede": "W-S-007",
+   "centro": [
+    9.0,
+    4
+   ],
+   "largura": 0.7,
+   "altura": 2.1,
+   "peitoril": 0,
+   "z_piso": 3.1,
+   "status": "EXTRAIDO",
+   "fonte": "EX-ARQ 07 Quadro de esquadrias"
+  },
+  {
+   "id": "ESQ-12",
+   "ref": "",
+   "tipo": "porta",
+   "parede": "W-S-001",
+   "centro": [
+    2.5,
+    0
+   ],
+   "largura": 1.0,
+   "altura": 2.1,
+   "peitoril": 0,
+   "z_piso": 3.1,
+   "status": "INFERIDO",
+   "fonte": "Vão sem etiqueta: verga a 2,10 (INFERIDO)"
+  }
+ ],
+ "nos": [
+  {
+   "id": "N-0001",
+   "x": 4.0,
+   "y": -3.0,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": true
+  },
+  {
+   "id": "N-0002",
+   "x": 4.0,
+   "y": -2.05,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0003",
+   "x": 4.0,
+   "y": -2.05,
+   "z": 0.45,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0004",
+   "x": 4.0,
+   "y": -1.95,
+   "z": 0.45,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0005",
+   "x": 4.0,
+   "y": -1.95,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0006",
+   "x": 4.0,
+   "y": -1.5,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0007",
+   "x": 1.0,
+   "y": -1.5,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0008",
+   "x": 0.5,
+   "y": -1.5,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0009",
+   "x": 0.5,
+   "y": 0.3,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0010",
+   "x": 0.5,
+   "y": 0.3,
+   "z": 7.0,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0011",
+   "x": 0.5,
+   "y": 1.5,
+   "z": 7.0,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0012",
+   "x": 1.45,
+   "y": 1.5,
+   "z": 7.0,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0013",
+   "x": 8.0,
+   "y": -1.5,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0014",
+   "x": 8.0,
+   "y": -2.45,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0015",
+   "x": 7.6,
+   "y": -3.0,
+   "z": -1.5,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0016",
+   "x": 7.6,
+   "y": -3.0,
+   "z": 0.2,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0017",
+   "x": 6.7,
+   "y": -3.0,
+   "z": 0.2,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0018",
+   "x": 6.3,
+   "y": -3.0,
+   "z": 0.2,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0019",
+   "x": 5.5,
+   "y": -3.0,
+   "z": 0.2,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0020",
+   "x": 5.5,
+   "y": -0.3,
+   "z": 0.2,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0021",
+   "x": 5.5,
+   "y": -0.3,
+   "z": 6.6,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0022",
+   "x": 5.5,
+   "y": 1.5,
+   "z": 6.6,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0023",
+   "x": 2.55,
+   "y": 1.5,
+   "z": 6.6,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0024",
+   "x": 2.3,
+   "y": 1.95,
+   "z": 6.35,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0025",
+   "x": 2.3,
+   "y": 3.0,
+   "z": 6.35,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0026",
+   "x": 5.0,
+   "y": 3.0,
+   "z": 6.35,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0027",
+   "x": 1.45,
+   "y": 1.2,
+   "z": 6.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0028",
+   "x": 0.3,
+   "y": 1.2,
+   "z": 6.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0029",
+   "x": 0.3,
+   "y": 3.0,
+   "z": 6.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0030",
+   "x": 0.3,
+   "y": 3.0,
+   "z": 6.15,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0031",
+   "x": 1.45,
+   "y": 1.9,
+   "z": 7.1,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0032",
+   "x": 0.3,
+   "y": 1.9,
+   "z": 7.1,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0033",
+   "x": 0.3,
+   "y": 1.9,
+   "z": 6.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0034",
+   "x": 5.0,
+   "y": 3.0,
+   "z": 5.0,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0035",
+   "x": 5.0,
+   "y": 3.0,
+   "z": 4.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0036",
+   "x": 5.0,
+   "y": 3.0,
+   "z": 2.8,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0037",
+   "x": 5.0,
+   "y": 1.5,
+   "z": 4.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0038",
+   "x": 5.0,
+   "y": 1.5,
+   "z": 3.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0039",
+   "x": 5.0,
+   "y": 4.0,
+   "z": 4.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0040",
+   "x": 7.0,
+   "y": 4.0,
+   "z": 4.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0041",
+   "x": 7.0,
+   "y": 4.0,
+   "z": 3.7,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0042",
+   "x": 5.0,
+   "y": 0.0,
+   "z": 4.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0043",
+   "x": 10.0,
+   "y": 0.0,
+   "z": 4.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0044",
+   "x": 10.0,
+   "y": 1.0,
+   "z": 4.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0045",
+   "x": 10.0,
+   "y": 1.0,
+   "z": 5.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0046",
+   "x": 5.0,
+   "y": 4.6,
+   "z": 2.8,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0047",
+   "x": 5.0,
+   "y": 4.6,
+   "z": 1.88,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0048",
+   "x": 5.0,
+   "y": 4.6,
+   "z": 1.18,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0049",
+   "x": 5.0,
+   "y": 5.0,
+   "z": 1.18,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0050",
+   "x": 5.0,
+   "y": 5.0,
+   "z": 0.28,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0051",
+   "x": 5.0,
+   "y": 4.0,
+   "z": 1.18,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0052",
+   "x": 6.5,
+   "y": 4.0,
+   "z": 1.18,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0053",
+   "x": 6.5,
+   "y": 4.0,
+   "z": 0.58,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0054",
+   "x": 8.75,
+   "y": 6.75,
+   "z": 2.8,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0055",
+   "x": 8.75,
+   "y": 6.75,
+   "z": 2.18,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0056",
+   "x": 7.5,
+   "y": 3.0,
+   "z": 2.8,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0057",
+   "x": 7.5,
+   "y": 0.0,
+   "z": 2.8,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0058",
+   "x": 7.5,
+   "y": 0.0,
+   "z": 1.2,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0059",
+   "x": 7.5,
+   "y": 0.0,
+   "z": 0.6,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0060",
+   "x": 9.3,
+   "y": 0.0,
+   "z": 1.2,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0061",
+   "x": 9.3,
+   "y": 0.0,
+   "z": 0.9,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0062",
+   "x": 1.0,
+   "y": 0.0,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0063",
+   "x": 1.0,
+   "y": 0.0,
+   "z": 0.6,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0064",
+   "x": 5.35,
+   "y": 5.0,
+   "z": -0.02,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0065",
+   "x": 5.35,
+   "y": 5.0,
+   "z": -0.35,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0066",
+   "x": 5.35,
+   "y": 4.4,
+   "z": -0.36,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0067",
+   "x": 5.35,
+   "y": 3.0,
+   "z": -0.383,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0068",
+   "x": 5.35,
+   "y": -1.05,
+   "z": -0.45,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0069",
+   "x": 7.0,
+   "y": 5.5,
+   "z": -0.02,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0070",
+   "x": 7.0,
+   "y": 5.5,
+   "z": -0.25,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0071",
+   "x": 7.0,
+   "y": 3.0,
+   "z": -0.31,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0072",
+   "x": 6.5,
+   "y": 4.0,
+   "z": 0.5,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0073",
+   "x": 6.5,
+   "y": 4.0,
+   "z": -0.2,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0074",
+   "x": 5.35,
+   "y": 1.5,
+   "z": 3.1,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0075",
+   "x": 5.35,
+   "y": 1.5,
+   "z": 2.8,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0076",
+   "x": 5.0,
+   "y": 0.5,
+   "z": 2.76,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0077",
+   "x": 8.5,
+   "y": 1.0,
+   "z": 3.1,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0078",
+   "x": 8.5,
+   "y": 1.0,
+   "z": 2.88,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0079",
+   "x": 5.0,
+   "y": 0.5,
+   "z": 2.8,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0080",
+   "x": 7.0,
+   "y": 4.0,
+   "z": 3.6,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0081",
+   "x": 7.0,
+   "y": 4.0,
+   "z": 2.89,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0082",
+   "x": 5.0,
+   "y": 0.5,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0083",
+   "x": 5.25,
+   "y": -1.05,
+   "z": -0.45,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0084",
+   "x": 7.5,
+   "y": 0.0,
+   "z": 0.5,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0085",
+   "x": 7.5,
+   "y": 0.0,
+   "z": -0.2,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0086",
+   "x": 7.5,
+   "y": -0.8,
+   "z": -0.22,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0087",
+   "x": 9.3,
+   "y": 0.0,
+   "z": -0.15,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0088",
+   "x": 7.3,
+   "y": -1.2,
+   "z": -0.45,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0089",
+   "x": 5.6,
+   "y": -1.2,
+   "z": -0.5,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0090",
+   "x": 5.35,
+   "y": -1.55,
+   "z": -0.65,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0091",
+   "x": 5.35,
+   "y": -3.0,
+   "z": -0.7,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": true
+  },
+  {
+   "id": "N-0092",
+   "x": 5.0,
+   "y": 4.4,
+   "z": -0.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0093",
+   "x": 5.0,
+   "y": 4.4,
+   "z": 6.45,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0094",
+   "x": 5.0,
+   "y": 0.5,
+   "z": 6.45,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0095",
+   "x": 0.3,
+   "y": 3.0,
+   "z": 5.95,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0096",
+   "x": 0.0,
+   "y": 3.0,
+   "z": 5.94,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0097",
+   "x": 0.0,
+   "y": 3.0,
+   "z": -0.45,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0098",
+   "x": -1.25,
+   "y": 3.0,
+   "z": -0.5,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0099",
+   "x": -1.5,
+   "y": 2.75,
+   "z": -0.6,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0100",
+   "x": -1.5,
+   "y": -3.0,
+   "z": -0.75,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": true
+  },
+  {
+   "id": "N-0101",
+   "x": 2.0,
+   "y": 7.95,
+   "z": 5.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0102",
+   "x": 0.0,
+   "y": 7.5,
+   "z": 5.25,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0103",
+   "x": 0.0,
+   "y": 7.5,
+   "z": -0.3,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  },
+  {
+   "id": "N-0104",
+   "x": -1.3,
+   "y": 3.2,
+   "z": -0.4,
+   "status": "EXTRAIDO",
+   "memoria": "Exemplo: coordenada fictícia",
+   "limite_lote": false
+  }
+ ],
+ "pontos": [
+  {
+   "id": "HID-T-BWC01-001",
+   "no": "N-0047",
+   "tipo": "registo de gaveta",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "x": 5.0,
+   "y": 4.6,
+   "z": 1.88,
+   "h": 1.9,
+   "pav": "T",
+   "ambiente": "BWC01",
+   "prancha": "EX-HID 02",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-HID 02 registada sobre ARQ; h=1.9 do isométrico (fictício)"
+  },
+  {
+   "id": "HID-T-BWC01-002",
+   "no": "N-0050",
+   "tipo": "vaso com caixa acoplada",
+   "sistema": "HID-AF",
+   "dn": 20,
+   "x": 5.0,
+   "y": 5.0,
+   "z": 0.28,
+   "h": 0.3,
+   "pav": "T",
+   "ambiente": "BWC01",
+   "prancha": "EX-HID 02",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-HID 02 registada sobre ARQ; h=0.3 do isométrico (fictício)"
+  },
+  {
+   "id": "HID-T-BWC01-003",
+   "no": "N-0053",
+   "tipo": "lavatório",
+   "sistema": "HID-AF",
+   "dn": 20,
+   "x": 6.5,
+   "y": 4.0,
+   "z": 0.58,
+   "h": 0.6,
+   "pav": "T",
+   "ambiente": "BWC01",
+   "prancha": "EX-HID 02",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-HID 02 registada sobre ARQ; h=0.6 do isométrico (fictício)"
+  },
+  {
+   "id": "HID-T-BWC01-004",
+   "no": "N-0055",
+   "tipo": "chuveiro",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "x": 8.75,
+   "y": 6.75,
+   "z": 2.18,
+   "h": 2.2,
+   "pav": "T",
+   "ambiente": "BWC01",
+   "prancha": "EX-HID 02",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-HID 02 registada sobre ARQ; h=2.2 do isométrico (fictício)"
+  },
+  {
+   "id": "HID-T-COZ-001",
+   "no": "N-0059",
+   "tipo": "pia de cozinha",
+   "sistema": "HID-AF",
+   "dn": 20,
+   "x": 7.5,
+   "y": 0.0,
+   "z": 0.6,
+   "h": 0.6,
+   "pav": "T",
+   "ambiente": "COZ",
+   "prancha": "EX-HID 02",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-HID 02 registada sobre ARQ; h=0.6 do isométrico (fictício)"
+  },
+  {
+   "id": "HID-T-COZ-002",
+   "no": "N-0061",
+   "tipo": "máquina de lavar",
+   "sistema": "HID-AF",
+   "dn": 20,
+   "x": 9.3,
+   "y": 0.0,
+   "z": 0.9,
+   "h": 0.9,
+   "pav": "T",
+   "ambiente": "COZ",
+   "prancha": "EX-HID 02",
+   "status": "INFERIDO",
+   "motivo": "Altura não cotada no isométrico: adotado 0,90 (altura usual de mercado)",
+   "memoria": "X,Y: planta EX-HID 02 registada sobre ARQ; h=0.9 do isométrico (fictício)"
+  },
+  {
+   "id": "HID-T-EXT-001",
+   "no": "N-0063",
+   "tipo": "torneira de jardim",
+   "sistema": "HID-AF",
+   "dn": 20,
+   "x": 1.0,
+   "y": 0.0,
+   "z": 0.6,
+   "h": null,
+   "pav": "T",
+   "ambiente": "EXT",
+   "prancha": "EX-HID 01",
+   "status": "PENDENTE",
+   "motivo": "Símbolo sem legenda na planta; altura não indicada",
+   "memoria": "X,Y: planta EX-HID 01 registada sobre ARQ; h=None do isométrico (fictício)"
+  },
+  {
+   "id": "HID-S-BWC02-001",
+   "no": "N-0034",
+   "tipo": "registo de gaveta",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "x": 5.0,
+   "y": 3.0,
+   "z": 5.0,
+   "h": 1.9,
+   "pav": "S",
+   "ambiente": "BWC02",
+   "prancha": "EX-HID 05",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-HID 05 registada sobre ARQ; h=1.9 do isométrico (fictício)"
+  },
+  {
+   "id": "HID-S-BWC02-002",
+   "no": "N-0038",
+   "tipo": "vaso com caixa acoplada",
+   "sistema": "HID-AF",
+   "dn": 20,
+   "x": 5.0,
+   "y": 1.5,
+   "z": 3.4,
+   "h": 0.3,
+   "pav": "S",
+   "ambiente": "BWC02",
+   "prancha": "EX-HID 05",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-HID 05 registada sobre ARQ; h=0.3 do isométrico (fictício)"
+  },
+  {
+   "id": "HID-S-BWC02-003",
+   "no": "N-0041",
+   "tipo": "lavatório",
+   "sistema": "HID-AF",
+   "dn": 20,
+   "x": 7.0,
+   "y": 4.0,
+   "z": 3.7,
+   "h": 0.6,
+   "pav": "S",
+   "ambiente": "BWC02",
+   "prancha": "EX-HID 05",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-HID 05 registada sobre ARQ; h=0.6 do isométrico (fictício)"
+  },
+  {
+   "id": "HID-S-BWC02-004",
+   "no": "N-0045",
+   "tipo": "chuveiro",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "x": 10.0,
+   "y": 1.0,
+   "z": 5.3,
+   "h": 2.2,
+   "pav": "S",
+   "ambiente": "BWC02",
+   "prancha": "EX-HID 05",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-HID 05 registada sobre ARQ; h=2.2 do isométrico (fictício)"
+  },
+  {
+   "id": "SAN-T-BWC01-001",
+   "no": "N-0064",
+   "tipo": "saída de vaso",
+   "sistema": "SAN-ESG",
+   "dn": 100,
+   "x": 5.35,
+   "y": 5.0,
+   "z": -0.02,
+   "h": 0.0,
+   "pav": "T",
+   "ambiente": "BWC01",
+   "prancha": "EX-SAN 01",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-SAN 01 registada sobre ARQ; h=0.0 do isométrico (fictício)"
+  },
+  {
+   "id": "SAN-T-BWC01-002",
+   "no": "N-0072",
+   "tipo": "saída de lavatório",
+   "sistema": "SAN-ESG",
+   "dn": 40,
+   "x": 6.5,
+   "y": 4.0,
+   "z": 0.5,
+   "h": 0.52,
+   "pav": "T",
+   "ambiente": "BWC01",
+   "prancha": "EX-SAN 01",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-SAN 01 registada sobre ARQ; h=0.52 do isométrico (fictício)"
+  },
+  {
+   "id": "SAN-T-BWC01-003",
+   "no": "N-0069",
+   "tipo": "caixa sifonada",
+   "sistema": "SAN-ESG",
+   "dn": 50,
+   "x": 7.0,
+   "y": 5.5,
+   "z": -0.02,
+   "h": 0.0,
+   "pav": "T",
+   "ambiente": "BWC01",
+   "prancha": "EX-SAN 01",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-SAN 01 registada sobre ARQ; h=0.0 do isométrico (fictício)"
+  },
+  {
+   "id": "SAN-T-COZ-001",
+   "no": "N-0084",
+   "tipo": "saída de pia",
+   "sistema": "SAN-ESG",
+   "dn": 50,
+   "x": 7.5,
+   "y": 0.0,
+   "z": 0.5,
+   "h": 0.5,
+   "pav": "T",
+   "ambiente": "COZ",
+   "prancha": "EX-SAN 01",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-SAN 01 registada sobre ARQ; h=0.5 do isométrico (fictício)"
+  },
+  {
+   "id": "SAN-T-COZ-002",
+   "no": "N-0061",
+   "tipo": "saída de máquina de lavar",
+   "sistema": "SAN-ESG",
+   "dn": 50,
+   "x": 9.3,
+   "y": 0.0,
+   "z": 0.9,
+   "h": 0.9,
+   "pav": "T",
+   "ambiente": "COZ",
+   "prancha": "EX-SAN 01",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-SAN 01 registada sobre ARQ; h=0.9 do isométrico (fictício)"
+  },
+  {
+   "id": "SAN-S-BWC02-001",
+   "no": "N-0074",
+   "tipo": "saída de vaso",
+   "sistema": "SAN-ESG",
+   "dn": 100,
+   "x": 5.35,
+   "y": 1.5,
+   "z": 3.1,
+   "h": 0.0,
+   "pav": "S",
+   "ambiente": "BWC02",
+   "prancha": "EX-SAN 02",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-SAN 02 registada sobre ARQ; h=0.0 do isométrico (fictício)"
+  },
+  {
+   "id": "SAN-S-BWC02-002",
+   "no": "N-0080",
+   "tipo": "saída de lavatório",
+   "sistema": "SAN-ESG",
+   "dn": 40,
+   "x": 7.0,
+   "y": 4.0,
+   "z": 3.6,
+   "h": 0.5,
+   "pav": "S",
+   "ambiente": "BWC02",
+   "prancha": "EX-SAN 02",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-SAN 02 registada sobre ARQ; h=0.5 do isométrico (fictício)"
+  },
+  {
+   "id": "SAN-S-BWC02-003",
+   "no": "N-0077",
+   "tipo": "caixa sifonada",
+   "sistema": "SAN-ESG",
+   "dn": 50,
+   "x": 8.5,
+   "y": 1.0,
+   "z": 3.1,
+   "h": 0.0,
+   "pav": "S",
+   "ambiente": "BWC02",
+   "prancha": "EX-SAN 02",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-SAN 02 registada sobre ARQ; h=0.0 do isométrico (fictício)"
+  },
+  {
+   "id": "SAN-C-COB-001",
+   "no": "N-0093",
+   "tipo": "terminal de ventilação",
+   "sistema": "SAN-VENT",
+   "dn": 50,
+   "x": 5.0,
+   "y": 4.4,
+   "z": 6.45,
+   "h": 0.3,
+   "pav": "C",
+   "ambiente": "COB",
+   "prancha": "EX-SAN 03",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-SAN 03 registada sobre ARQ; h=0.3 do isométrico (fictício)"
+  },
+  {
+   "id": "SAN-C-COB-002",
+   "no": "N-0094",
+   "tipo": "terminal de ventilação",
+   "sistema": "SAN-VENT",
+   "dn": 100,
+   "x": 5.0,
+   "y": 0.5,
+   "z": 6.45,
+   "h": 0.3,
+   "pav": "C",
+   "ambiente": "COB",
+   "prancha": "EX-SAN 03",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-SAN 03 registada sobre ARQ; h=0.3 do isométrico (fictício)"
+  },
+  {
+   "id": "DRE-C-COB-001",
+   "no": "N-0030",
+   "tipo": "ralo da cobertura",
+   "sistema": "DRE-PLU",
+   "dn": 100,
+   "x": 0.3,
+   "y": 3.0,
+   "z": 6.15,
+   "h": 0.0,
+   "pav": "C",
+   "ambiente": "COB",
+   "prancha": "EX-DRE 01",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-DRE 01 registada sobre ARQ; h=0.0 do isométrico (fictício)"
+  },
+  {
+   "id": "DRE-S-Q1-001",
+   "no": "N-0101",
+   "tipo": "dreno de ar condicionado",
+   "sistema": "DRE-AC",
+   "dn": 20,
+   "x": 2.0,
+   "y": 7.95,
+   "z": 5.3,
+   "h": 2.2,
+   "pav": "S",
+   "ambiente": "Q1",
+   "prancha": "EX-DRE 02",
+   "status": "EXTRAIDO",
+   "motivo": "",
+   "memoria": "X,Y: planta EX-DRE 02 registada sobre ARQ; h=2.2 do isométrico (fictício)"
+  }
+ ],
+ "trechos": [
+  {
+   "id": "T-HID-0001",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0001",
+    "N-0002",
+    "N-0003"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 01",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "enterrado"
+  },
+  {
+   "id": "T-HID-0002",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0004",
+    "N-0005",
+    "N-0006"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 01",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-HID-0003",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0006",
+    "N-0007",
+    "N-0008",
+    "N-0009",
+    "N-0010",
+    "N-0011",
+    "N-0012"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 01",
+   "memoria": "Alimentação direta da caixa de água (subida); trecho enterrado até ao interior",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-HID-0004",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0006",
+    "N-0013",
+    "N-0014"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 01",
+   "memoria": "Ramal enterrado até ao reservatório inferior (boia)",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-HID-0005",
+   "sistema": "HID-AF",
+   "dn": 32,
+   "nos": [
+    "N-0015",
+    "N-0016",
+    "N-0017"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 04",
+   "memoria": "Sucção: válvula de pé no reservatório inferior",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-HID-0006",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0018",
+    "N-0019",
+    "N-0020",
+    "N-0021",
+    "N-0022",
+    "N-0023"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 04",
+   "memoria": "Recalque até à caixa de água",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-HID-0007",
+   "sistema": "HID-AF",
+   "dn": 32,
+   "nos": [
+    "N-0024",
+    "N-0025",
+    "N-0026"
+   ],
+   "pav": "C",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 04",
+   "memoria": "Barrilete",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-HID-0008",
+   "sistema": "HID-AF",
+   "dn": 32,
+   "nos": [
+    "N-0027",
+    "N-0028",
+    "N-0029",
+    "N-0030"
+   ],
+   "pav": "C",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 04",
+   "memoria": "Limpeza da caixa → ralo da cobertura",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-HID-0009",
+   "sistema": "HID-AF",
+   "dn": 32,
+   "nos": [
+    "N-0031",
+    "N-0032",
+    "N-0033"
+   ],
+   "pav": "C",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 04",
+   "memoria": "Extravasor → junta à limpeza",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-HID-0010",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0026",
+    "N-0034",
+    "N-0035",
+    "N-0036"
+   ],
+   "pav": "S",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 05",
+   "memoria": "Coluna AF01 (isométrico ISO-01)",
+   "motivo": "",
+   "embutido": "parede"
+  },
+  {
+   "id": "T-HID-0011",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0035",
+    "N-0037",
+    "N-0038"
+   ],
+   "pav": "S",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 05",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "parede"
+  },
+  {
+   "id": "T-HID-0012",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0035",
+    "N-0039",
+    "N-0040",
+    "N-0041"
+   ],
+   "pav": "S",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 05",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "parede"
+  },
+  {
+   "id": "T-HID-0013",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0037",
+    "N-0042",
+    "N-0043",
+    "N-0044",
+    "N-0045"
+   ],
+   "pav": "S",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 05",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "parede"
+  },
+  {
+   "id": "T-HID-0014",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0036",
+    "N-0046",
+    "N-0047",
+    "N-0048",
+    "N-0049",
+    "N-0050"
+   ],
+   "pav": "T",
+   "status": "INFERIDO",
+   "prancha": "EX-HID 02",
+   "memoria": "Ramal sobre o forro: Z inferido entre forro e laje",
+   "motivo": "Z do ramal = +2,80 entre forro (+2,70) e fundo da laje (+2,90); cota não indicada",
+   "embutido": "forro"
+  },
+  {
+   "id": "T-HID-0015",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0048",
+    "N-0051",
+    "N-0052",
+    "N-0053"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 02",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "parede"
+  },
+  {
+   "id": "T-HID-0016",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0046",
+    "N-0054",
+    "N-0055"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 02",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "forro"
+  },
+  {
+   "id": "T-HID-0017",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0036",
+    "N-0056",
+    "N-0057",
+    "N-0058",
+    "N-0059"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 02",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "forro"
+  },
+  {
+   "id": "T-HID-0018",
+   "sistema": "HID-AF",
+   "dn": 25,
+   "nos": [
+    "N-0058",
+    "N-0060",
+    "N-0061"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-HID 02",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "parede"
+  },
+  {
+   "id": "T-HID-0019",
+   "sistema": "HID-AF",
+   "dn": 20,
+   "nos": [
+    "N-0007",
+    "N-0062",
+    "N-0063"
+   ],
+   "pav": "T",
+   "status": "INFERIDO",
+   "prancha": "EX-HID 01",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "Ligação da torneira de jardim não desenhada; traçado deduzido",
+   "embutido": "enterrado"
+  },
+  {
+   "id": "T-ESG-0001",
+   "sistema": "SAN-ESG",
+   "dn": 100,
+   "nos": [
+    "N-0064",
+    "N-0065",
+    "N-0066",
+    "N-0067",
+    "N-0068"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 01",
+   "memoria": "Coletor do BWC01; Z interpolado pelo comprimento entre saída do vaso e CI-01",
+   "motivo": "",
+   "embutido": "enterrado"
+  },
+  {
+   "id": "T-ESG-0002",
+   "sistema": "SAN-ESG",
+   "dn": 50,
+   "nos": [
+    "N-0069",
+    "N-0070",
+    "N-0071",
+    "N-0067"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 01",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "enterrado"
+  },
+  {
+   "id": "T-ESG-0003",
+   "sistema": "SAN-ESG",
+   "dn": 40,
+   "nos": [
+    "N-0072",
+    "N-0073",
+    "N-0070"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 01",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-ESG-0004",
+   "sistema": "SAN-ESG",
+   "dn": 100,
+   "nos": [
+    "N-0074",
+    "N-0075",
+    "N-0076"
+   ],
+   "pav": "S",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 02",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "forro"
+  },
+  {
+   "id": "T-ESG-0005",
+   "sistema": "SAN-ESG",
+   "dn": 50,
+   "nos": [
+    "N-0077",
+    "N-0078",
+    "N-0079"
+   ],
+   "pav": "S",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 02",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "forro"
+  },
+  {
+   "id": "T-ESG-0006",
+   "sistema": "SAN-ESG",
+   "dn": 40,
+   "nos": [
+    "N-0080",
+    "N-0081",
+    "N-0079"
+   ],
+   "pav": "S",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 02",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "forro"
+  },
+  {
+   "id": "T-ESG-0007",
+   "sistema": "SAN-ESG",
+   "dn": 100,
+   "nos": [
+    "N-0079",
+    "N-0076",
+    "N-0082",
+    "N-0083"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 03",
+   "memoria": "TQ-01; base do TQ a -0,40 (INFERIDA, ver DIV-001)",
+   "motivo": "",
+   "embutido": "parede"
+  },
+  {
+   "id": "T-ESG-0008",
+   "sistema": "SAN-ESG",
+   "dn": 50,
+   "nos": [
+    "N-0084",
+    "N-0085",
+    "N-0086"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 01",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-ESG-0009",
+   "sistema": "SAN-ESG",
+   "dn": 50,
+   "nos": [
+    "N-0061",
+    "N-0087",
+    "N-0085"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 01",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-ESG-0010",
+   "sistema": "SAN-ESG",
+   "dn": 100,
+   "nos": [
+    "N-0088",
+    "N-0089"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 01",
+   "memoria": "Traço vetorial da planta registada; Z dos isométricos/notas",
+   "motivo": "",
+   "embutido": "enterrado"
+  },
+  {
+   "id": "T-ESG-0011",
+   "sistema": "SAN-ESG",
+   "dn": 100,
+   "nos": [
+    "N-0090",
+    "N-0091"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 01",
+   "memoria": "Saída para a rede pública",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-VEN-0001",
+   "sistema": "SAN-VENT",
+   "dn": 50,
+   "nos": [
+    "N-0066",
+    "N-0092",
+    "N-0093"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 03",
+   "memoria": "Coluna de ventilação CV-01 até 0,30 acima da cobertura (nota EX-SAN 03)",
+   "motivo": "",
+   "embutido": "parede"
+  },
+  {
+   "id": "T-VEN-0002",
+   "sistema": "SAN-VENT",
+   "dn": 100,
+   "nos": [
+    "N-0079",
+    "N-0094"
+   ],
+   "pav": "S",
+   "status": "EXTRAIDO",
+   "prancha": "EX-SAN 03",
+   "memoria": "Prolongamento do TQ-01 para ventilação",
+   "motivo": "",
+   "embutido": "parede"
+  },
+  {
+   "id": "T-PLU-0001",
+   "sistema": "DRE-PLU",
+   "dn": 100,
+   "nos": [
+    "N-0030",
+    "N-0095",
+    "N-0096",
+    "N-0097",
+    "N-0098"
+   ],
+   "pav": "C",
+   "status": "EXTRAIDO",
+   "prancha": "EX-DRE 01",
+   "memoria": "Condutor AP-01",
+   "motivo": "",
+   "embutido": "parede"
+  },
+  {
+   "id": "T-PLU-0002",
+   "sistema": "DRE-PLU",
+   "dn": 100,
+   "nos": [
+    "N-0099",
+    "N-0100"
+   ],
+   "pav": "T",
+   "status": "EXTRAIDO",
+   "prancha": "EX-DRE 01",
+   "memoria": "Saída para a sarjeta",
+   "motivo": "",
+   "embutido": ""
+  },
+  {
+   "id": "T-DAC-0001",
+   "sistema": "DRE-AC",
+   "dn": 20,
+   "nos": [
+    "N-0101",
+    "N-0102",
+    "N-0103",
+    "N-0104"
+   ],
+   "pav": "S",
+   "status": "INFERIDO",
+   "prancha": "EX-DRE 02",
+   "memoria": "Dreno do AC rastreado até CA-01",
+   "motivo": "Traço sem legenda na planta; destino deduzido (CA-01)",
+   "embutido": "parede"
+  }
+ ],
+ "loucas": [
+  {
+   "id": "LC-T-BWC01-01",
+   "tipo": "vaso",
+   "pav": "T",
+   "ambiente": "BWC01",
+   "apoio": [
+    5.065,
+    5.0
+   ],
+   "normal": [
+    1,
+    0
+   ],
+   "largura": 0.36,
+   "profundidade": 0.65,
+   "altura": 0.4,
+   "z": -0.02,
+   "fonte": "EX-ARQ 02/03 desenho vetorial; dimensões usuais de mercado (sem cota)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "LC-T-BWC01-02",
+   "tipo": "bancada_1cuba",
+   "pav": "T",
+   "ambiente": "BWC01",
+   "apoio": [
+    6.5,
+    4.065
+   ],
+   "normal": [
+    0,
+    1
+   ],
+   "largura": 0.6,
+   "profundidade": 0.45,
+   "altura": 0.85,
+   "z": -0.02,
+   "fonte": "EX-ARQ 02/03 desenho vetorial; dimensões usuais de mercado (sem cota)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "LC-T-BWC01-03",
+   "tipo": "chuveiro",
+   "pav": "T",
+   "ambiente": "BWC01",
+   "apoio": [
+    8.696896,
+    6.696896
+   ],
+   "normal": [
+    -0.7071067811865475,
+    -0.7071067811865475
+   ],
+   "largura": 0.9,
+   "profundidade": 0.9,
+   "altura": 2.1,
+   "z": -0.02,
+   "fonte": "EX-ARQ 02/03 desenho vetorial; dimensões usuais de mercado (sem cota)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "LC-T-COZ-01",
+   "tipo": "bancada_2cubas",
+   "pav": "T",
+   "ambiente": "COZ",
+   "apoio": [
+    7.5,
+    0.075
+   ],
+   "normal": [
+    0,
+    1
+   ],
+   "largura": 1.2,
+   "profundidade": 0.6,
+   "altura": 0.9,
+   "z": 0.0,
+   "fonte": "EX-ARQ 02/03 desenho vetorial; dimensões usuais de mercado (sem cota)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "LC-T-COZ-02",
+   "tipo": "maquina_lavar",
+   "pav": "T",
+   "ambiente": "COZ",
+   "apoio": [
+    9.3,
+    0.075
+   ],
+   "normal": [
+    0,
+    1
+   ],
+   "largura": 0.6,
+   "profundidade": 0.6,
+   "altura": 0.85,
+   "z": 0.0,
+   "fonte": "EX-ARQ 02/03 desenho vetorial; dimensões usuais de mercado (sem cota)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "LC-S-BWC02-01",
+   "tipo": "vaso",
+   "pav": "S",
+   "ambiente": "BWC02",
+   "apoio": [
+    5.065,
+    1.5
+   ],
+   "normal": [
+    1,
+    0
+   ],
+   "largura": 0.36,
+   "profundidade": 0.65,
+   "altura": 0.4,
+   "z": 3.1,
+   "fonte": "EX-ARQ 02/03 desenho vetorial; dimensões usuais de mercado (sem cota)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "LC-S-BWC02-02",
+   "tipo": "bancada_1cuba",
+   "pav": "S",
+   "ambiente": "BWC02",
+   "apoio": [
+    7.0,
+    3.935
+   ],
+   "normal": [
+    0,
+    -1
+   ],
+   "largura": 0.8,
+   "profundidade": 0.45,
+   "altura": 0.85,
+   "z": 3.1,
+   "fonte": "EX-ARQ 02/03 desenho vetorial; dimensões usuais de mercado (sem cota)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "LC-S-BWC02-03",
+   "tipo": "chuveiro",
+   "pav": "S",
+   "ambiente": "BWC02",
+   "apoio": [
+    9.925,
+    1.0
+   ],
+   "normal": [
+    -1,
+    0
+   ],
+   "largura": 0.9,
+   "profundidade": 0.9,
+   "altura": 2.1,
+   "z": 3.1,
+   "fonte": "EX-ARQ 02/03 desenho vetorial; dimensões usuais de mercado (sem cota)",
+   "status": "EXTRAIDO"
+  }
+ ],
+ "equipamentos": [
+  {
+   "id": "EQ-HD-01",
+   "tipo": "hidrometro",
+   "nome": "Hidrómetro",
+   "centro": [
+    4.0,
+    -2.0,
+    0.6
+   ],
+   "dims": [
+    0.4,
+    0.2,
+    0.5
+   ],
+   "rot": 0,
+   "sistema": "HID-AF",
+   "fonte": "EX-HID/SAN/DRE detalhes (fictício)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "EQ-RI-01",
+   "tipo": "reservatorio_inferior",
+   "nome": "Reservatório inferior",
+   "centro": [
+    8.0,
+    -3.0,
+    -0.8
+   ],
+   "dims": [
+    1.5,
+    1.2,
+    1.6
+   ],
+   "rot": 0,
+   "sistema": "HID-AF",
+   "fonte": "EX-HID/SAN/DRE detalhes (fictício)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "EQ-MB-01",
+   "tipo": "motobomba",
+   "nome": "Motobomba",
+   "centro": [
+    6.5,
+    -3.0,
+    0.25
+   ],
+   "dims": [
+    0.5,
+    0.3,
+    0.35
+   ],
+   "rot": 0,
+   "sistema": "HID-AF",
+   "fonte": "EX-HID/SAN/DRE detalhes (fictício)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "EQ-CX-01",
+   "tipo": "caixa_agua",
+   "nome": "Caixa de água 1000 L",
+   "centro": [
+    2.0,
+    1.5,
+    6.75
+   ],
+   "dims": [
+    1.2,
+    1.0,
+    1.0
+   ],
+   "rot": 0,
+   "sistema": "HID-AF",
+   "fonte": "EX-HID/SAN/DRE detalhes (fictício)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "EQ-CI-01",
+   "tipo": "caixa_inspecao",
+   "nome": "Caixa de inspeção CI-01",
+   "centro": [
+    5.35,
+    -1.3,
+    -0.6
+   ],
+   "dims": [
+    0.6,
+    0.6,
+    0.6
+   ],
+   "rot": 0,
+   "sistema": "SAN-ESG",
+   "fonte": "EX-HID/SAN/DRE detalhes (fictício)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "EQ-CG-01",
+   "tipo": "caixa_gordura",
+   "nome": "Caixa de gordura CG-01",
+   "centro": [
+    7.5,
+    -1.0,
+    -0.4
+   ],
+   "dims": [
+    0.5,
+    0.5,
+    0.6
+   ],
+   "rot": 0,
+   "sistema": "SAN-ESG",
+   "fonte": "EX-HID/SAN/DRE detalhes (fictício)",
+   "status": "EXTRAIDO"
+  },
+  {
+   "id": "EQ-CA-01",
+   "tipo": "caixa_areia",
+   "nome": "Caixa de areia CA-01",
+   "centro": [
+    -1.5,
+    3.0,
+    -0.5
+   ],
+   "dims": [
+    0.6,
+    0.6,
+    0.6
+   ],
+   "rot": 0,
+   "sistema": "DRE-PLU",
+   "fonte": "EX-HID/SAN/DRE detalhes (fictício)",
+   "status": "EXTRAIDO"
+  }
+ ],
+ "divergencias": [
+  {
+   "id": "DIV-001",
+   "tipo": "Nível não cotado",
+   "descricao": "Cota da base do TQ-01 não indicada; adotada -0,40 para fechar com a CI-01.",
+   "pranchas": [
+    "EX-SAN 03",
+    "EX-ARQ 05"
+   ],
+   "pos": [
+    5.0,
+    0.5,
+    -0.4
+   ],
+   "ids": [
+    "T-ESG-0007"
+   ],
+   "gravidade": "media",
+   "disciplinas": [
+    "SAN",
+    "ARQ"
+   ]
+  },
+  {
+   "id": "DIV-002",
+   "tipo": "Símbolo sem legenda",
+   "descricao": "Dreno de AC desenhado com traço sem legenda; destino deduzido.",
+   "pranchas": [
+    "EX-DRE 02"
+   ],
+   "pos": [
+    0.0,
+    7.5,
+    2.0
+   ],
+   "ids": [
+    "T-DAC-0001",
+    "DRE-S-Q1-001"
+   ],
+   "gravidade": "baixa",
+   "disciplinas": [
+    "DRE"
+   ]
+  },
+  {
+   "id": "DIV-003",
+   "tipo": "Contagem iso ≠ planta",
+   "descricao": "Isométrico ISO-01 mostra 3 pontos no BWC01; a planta mostra 4 (chuveiro).",
+   "pranchas": [
+    "EX-HID 02",
+    "EX-HID 06"
+   ],
+   "pos": [
+    8.75,
+    6.75,
+    2.18
+   ],
+   "ids": [
+    "HID-T-BWC01-004"
+   ],
+   "gravidade": "alta",
+   "disciplinas": [
+    "HID"
+   ]
+  },
+  {
+   "id": "DIV-004",
+   "tipo": "Nomenclatura de ambiente",
+   "descricao": "ARQ chama 'WC Social' e HID chama 'Banheiro 01'.",
+   "pranchas": [
+    "EX-ARQ 02",
+    "EX-HID 02"
+   ],
+   "pos": [
+    6.8,
+    6.0,
+    0.0
+   ],
+   "ids": [],
+   "gravidade": "baixa",
+   "disciplinas": [
+    "ARQ"
+   ]
+  },
+  {
+   "id": "DIV-005",
+   "tipo": "Símbolo sem legenda",
+   "descricao": "Torneira de jardim: símbolo sem legenda e sem altura.",
+   "pranchas": [
+    "EX-HID 01"
+   ],
+   "pos": [
+    1.0,
+    0.0,
+    0.6
+   ],
+   "ids": [
+    "HID-T-EXT-001"
+   ],
+   "gravidade": "media",
+   "disciplinas": [
+    "HID",
+    "ARQ"
+   ]
+  }
+ ],
+ "premissas": [
+  "Origem: vértice externo SO do térreo (eixo das paredes exteriores).",
+  "Z = cota de projeto; RN = piso acabado do térreo ±0,000.",
+  "Ramais de AF sobre o forro do térreo a +2,80 (INFERIDO: entre forro +2,70 e fundo da laje +2,90).",
+  "Registo de gaveta a 1,90 do piso (isométrico).",
+  "Máquina de lavar a 0,90 (altura usual de mercado, sem cota).",
+  "Muro frontal: altura adotada 1,80 (não cotada)."
+ ],
+ "verificacoes": {},
+ "locacao": {}
+}

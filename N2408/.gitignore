@@ -6,3 +6,5 @@ png/
 info/
 pilot/
 inventario_p1.tsv
+drive/
+relatorio/*.pdf

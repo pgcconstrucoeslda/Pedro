@@ -76,7 +76,7 @@ def cab(ws, row, cols, widths=None):
     if widths:
         for i, w in enumerate(widths, 1):
             ws.column_dimensions[get_column_letter(i)].width = w
-    ws.freeze_panes = ws.cell(row=row + 1, column=1)
+    ws.freeze_panes = f'A{row + 1}'
 
 
 def tabela(ws, ref, nome):
@@ -94,6 +94,8 @@ for r in csv.DictReader(open(f'{RAIZ}/manifesto.tsv'), delimiter='\t'):
 dados = {}
 for jf in sorted(glob.glob(f'{RAIZ}/json/**/*.json', recursive=True)):
     rel = jf[len(RAIZ) + 6:-5]
+    if rel.startswith('alturas/'):
+        continue
     try:
         dados[rel] = json.load(open(jf))
     except Exception as e:
@@ -121,6 +123,25 @@ for rel, d in dados.items():
             if not e['descricao'] and chave_cor in AVAC_COR:
                 e['descricao'], e['match'] = AVAC_COR[chave_cor], 'cor*'
 
+# alturas de teto atribuídas às linhas de parede (scripts/alturas_paredes.py)
+PAR_TET = {'3-05': 'Piso 0', '3-06': 'Piso 1', '3-07': 'Piso 2', '3-08': 'Piso 3'}
+ALT = {}
+CATALOGO = collections.OrderedDict()   # chave 'Piso 1|T03' -> (piso, descrição, altura legenda)
+_cod = {}
+for des, piso in PAR_TET.items():
+    fn = f'{RAIZ}/json/alturas/{des}.json'
+    if not os.path.exists(fn):
+        continue
+    linhas = json.load(open(fn))['linhas']
+    for h, v in sorted(linhas.items(), key=lambda kv: (kv[1]['teto'] or '')):
+        desc = v['teto'] if v['handle_teto'] else 'SEM TETO IDENTIFICADO (linha fora dos polígonos de teto)'
+        if (piso, desc) not in _cod:
+            n = sum(1 for k in _cod if k[0] == piso) + 1
+            _cod[(piso, desc)] = f'{piso}|T{n:02d}'
+            CATALOGO[_cod[(piso, desc)]] = (piso, desc, v['altura_m'] if v['handle_teto'] else None)
+        ALT[('ARQ/03-Acabamentos/Paredes/' + des, h)] = (_cod[(piso, desc)], v['handle_teto'])
+SO_METRO = re.compile(r'RODAP|ESPELHO', re.I)
+
 wb = Workbook()
 ws0 = wb.active
 ws0.title = 'LEIA-ME'
@@ -128,8 +149,9 @@ ws0.title = 'LEIA-ME'
 # ================= Rastreio =================
 wr = wb.create_sheet('Rastreio')
 cols_r = ['ID', 'Pasta', 'Desenho', 'Piso', 'Família', 'Handle CAD', 'Tipo', 'Layer', 'Cor', 'Chave', 'Descrição (legenda)',
-          'Match', 'Comp. (m)', 'Área (m²)', 'Un', 'X (m)', 'Y (m)']
-cab(wr, 1, cols_r, [8, 22, 34, 14, 8, 10, 11, 16, 10, 44, 60, 7, 10, 10, 5, 10, 10])
+          'Match', 'Comp. (m)', 'Área (m²)', 'Un', 'X (m)', 'Y (m)',
+          'Teto (código)', 'Handle teto', 'Altura teto (m)', 'Medição parede', 'Área parede (m²)', 'Parede sem altura (m)']
+cab(wr, 1, cols_r, [8, 22, 34, 14, 8, 10, 11, 16, 10, 44, 60, 7, 10, 10, 5, 10, 10, 14, 10, 10, 10, 12, 12])
 linha = 2
 agreg = collections.OrderedDict()   # (fam, rel, chave) -> info
 sem_legenda = []
@@ -171,9 +193,19 @@ for rel, d in dados.items():
             if fam in ('PAV', 'TET', 'PAR') and not e['descricao']:
                 a = nm_ag[k]; a[0] += 1; a[1] += e['comp_m']; a[2] += e['area_m2']
             continue
-        wr.append([linha - 1, pasta, des, piso, fam, e['handle'], e['tipo'], e['layer'], e['cor'], k, e['descricao'],
+        wr.append([None, pasta, des, piso, fam, e['handle'], e['tipo'], e['layer'], e['cor'], k, e['descricao'],
                    e['match'], round(e['comp_m'], 3), round(e['area_m2'], 3), 1 if un == 'un' else None,
                    round(e['x'], 2) if e['x'] is not None else None, round(e['y'], 2) if e['y'] is not None else None])
+        linha = wr.max_row          # linha efetivamente escrita pelo append
+        wr.cell(linha, 1, linha - 1)
+        if fam == 'PAR' and un == 'm':
+            cod, ht_ = ALT.get((rel, e['handle']), (None, None))
+            n_ = linha
+            wr.cell(n_, 18, cod); wr.cell(n_, 19, ht_)
+            wr.cell(n_, 20, f"=IFERROR(INDEX('Alturas tetos'!$E:$E,MATCH($R{n_},'Alturas tetos'!$A:$A,0)),\"\")")
+            wr.cell(n_, 21, 'm' if SO_METRO.search(e['descricao']) else 'm²')
+            wr.cell(n_, 22, f'=IF(AND($U{n_}="m²",ISNUMBER($T{n_})),$M{n_}*$T{n_},0)')
+            wr.cell(n_, 23, f'=IF(AND($U{n_}="m²",NOT(ISNUMBER($T{n_}))),$M{n_},0)')
         linha += 1
         if fam in ('PAV', 'TET', 'PAR', 'AVAC'):
             if un == 'un' and fam == 'AVAC':
@@ -199,13 +231,13 @@ for rel, d in dados.items():
         if k.split('|')[1] in ('arquitectura', 'estrutura') and k.startswith('LINHA'):
             continue
         sem_legenda.append([pasta, des, piso, fam, k, n, round(comp, 2), round(area, 2), ' | '.join(sorted(cands))[:400]])
-ult_r = linha - 1
+ult_r = wr.max_row
 for row in wr.iter_rows(min_row=2, max_row=ult_r):
     for c in row:
         c.font = fnt
-    for c in row[12:14]:
+    for c in row[12:14] + row[21:23]:
         c.number_format = '#,##0.000'
-tabela(wr, f'A1:Q{ult_r}', 'Rastreio')
+tabela(wr, f'A1:W{ult_r}', 'Rastreio')
 R = "Rastreio!"
 
 # ================= folhas por família =================
@@ -222,7 +254,7 @@ def folha_familia(nome, fam, unid_padrao, titulo, nome_tab, extra_pd=False):
     if fam == 'PAV':
         cols.append('Int/Ext'); widths.append(8)
     if extra_pd:
-        cols += ['Pé-direito (m)', 'Área (m²) = m × PD']; widths += [11, 14]
+        cols += ['Área parede (m²) = m × altura teto', 'Sem altura (m)']; widths += [14, 11]
     cab(ws, hdr, cols, widths)
     r = hdr + 1
     for (fm, rel, k), inf in agreg.items():
@@ -243,9 +275,8 @@ def folha_familia(nome, fam, unid_padrao, titulo, nome_tab, extra_pd=False):
         if fam == 'PAV':
             ws.cell(r, c, 'Ext' if EXTERIOR.search(inf['desc']) else 'Int').font = Font(name=F, size=10, color='0000FF'); c += 1
         if extra_pd:
-            pd = ws.cell(r, c, f"=IFERROR(INDEX($M$2:$S$2,MATCH($C{r},$M$1:$S$1,0)),\"\")")
-            pd.font = fln
-            ws.cell(r, c + 1, f'=IF(AND(ISNUMBER(J{r}),$F{r}="m"),G{r}*J{r},"")').number_format = '#,##0.00'
+            ws.cell(r, c, f'=SUMIFS({R}$V:$V,{R}$C:$C,$B{r},{R}$B:$B,$A{r},{R}$J:$J,$E{r})').number_format = '#,##0.00;-#,##0.00;"-"'
+            ws.cell(r, c + 1, f'=SUMIFS({R}$W:$W,{R}$C:$C,$B{r},{R}$B:$B,$A{r},{R}$J:$J,$E{r})').number_format = '#,##0.00;-#,##0.00;"-"'
         for cc in range(1, len(cols) + 1):
             x = ws.cell(r, cc)
             if x.font != fln and x.font.color is None or x.font == Font():
@@ -259,21 +290,42 @@ def folha_familia(nome, fam, unid_padrao, titulo, nome_tab, extra_pd=False):
         ws.conditional_formatting.add(f'G{hdr+1}:G{last}', CellIsRule(operator='equal', formula=['0'], fill=fill_warn))
     ws.auto_filter.ref = f'A{hdr}:{get_column_letter(len(cols))}{max(last, hdr+1)}'
     if extra_pd:
-        ws['L1'] = 'Pé-direito por piso (m) ►'; ws['L1'].font = fb
-        ws['L2'] = 'PREENCHER (amarelo)'; ws['L2'].font = Font(name=F, size=9, italic=True)
-        for i, p in enumerate(['Piso 0', 'Piso 1', 'Piso 2', 'Piso 3', 'Cobertura', 'Ruína (P1/P2)', 'Exterior']):
-            a = ws.cell(1, 13 + i, p); a.font = fb; a.fill = fill_sub; a.border = brd
-            b = ws.cell(2, 13 + i, None); b.fill = fill_in; b.font = fin; b.border = brd; b.number_format = '0.00'
-            ws.column_dimensions[get_column_letter(13 + i)].width = 11
-        ws['M2'] = 2.70
-        ws['M3'] = 'Exemplo: 2,70 (valor ilustrativo, substituir pelo pé-direito de projeto)'
-        ws['M3'].font = Font(name=F, size=8, italic=True, color='808080')
+        ws['A2'] = ('m = desenvolvimento em planta (SUMIFS Rastreio). Área = m × altura do teto do compartimento (legenda dos tetos, '
+                    'atribuída por geometria — ver separador "Alturas tetos"). Rodapés e espelhos ficam só em m. Sem dedução de vãos.')
     return ws, hdr, last
 
 
 wp, hp, lp = folha_familia('Pavimentos', 'PAV', 'm²', 'Pavimentos — áreas por acabamento (hatches identificados pela legenda)', 'Pav')
 wt, ht, lt = folha_familia('Tetos', 'TET', 'm²', 'Tetos — áreas por tipo de teto (hatches identificados pela legenda)', 'Tet')
-wpa, hpa, lpa = folha_familia('Paredes', 'PAR', 'm', 'Paredes — desenvolvimento (m) por acabamento, medido em planta', 'Par', extra_pd=True)
+wpa, hpa, lpa = folha_familia('Paredes', 'PAR', 'm', 'Paredes — desenvolvimento (m) e área (m²) por acabamento', 'Par', extra_pd=True)
+
+# ================= Alturas tetos =================
+wal = wb.create_sheet('Alturas tetos')
+wal['A1'] = 'Alturas de teto usadas no cálculo da área de paredes'
+wal['A1'].font = ft
+wal['A2'] = ('Cada linha de acabamento de parede foi associada ao teto do compartimento onde está (plantas 3-10…3-13, desvio de 31,0 m em X entre plantas). '
+             'Altura = valor "ALTURA: xxx cm" da legenda. Onde a legenda não indica altura, preencher a coluna F (amarelo).')
+wal['A2'].font = Font(name=F, size=9, italic=True)
+cab(wal, 4, ['Chave', 'Piso', 'Teto (descrição da legenda)', 'Altura legenda (m)', 'Altura usada (m)', 'Altura manual (preencher)', 'Nº linhas parede', 'Parede afetada (m)'],
+    [14, 9, 90, 11, 11, 13, 10, 12])
+r = 5
+for cod, (piso, desc, alt) in CATALOGO.items():
+    wal.cell(r, 1, cod); wal.cell(r, 2, piso); wal.cell(r, 3, desc)
+    wal.cell(r, 4, alt)
+    wal.cell(r, 5, f'=IF(ISNUMBER(F{r}),F{r},IF(ISNUMBER(D{r}),D{r},""))')
+    wal.cell(r, 7, f'=COUNTIFS({R}$R:$R,$A{r})')
+    wal.cell(r, 8, f'=SUMIFS({R}$M:$M,{R}$R:$R,$A{r})')
+    for cc in range(1, 9):
+        x = wal.cell(r, cc); x.border = brd; x.font = fnt
+    wal.cell(r, 4).font = fin
+    wal.cell(r, 6).font = fin
+    wal.cell(r, 6).fill = fill_in
+    wal.cell(r, 3).alignment = wrap
+    for cc in (4, 5, 6):
+        wal.cell(r, cc).number_format = '0.00'
+    wal.cell(r, 8).number_format = '#,##0.00'
+    r += 1
+wal.conditional_formatting.add(f'E5:E{r-1}', FormulaRule(formula=['LEN(E5)=0'], fill=fill_warn))
 wi, hi, li = folha_familia('Infraestruturas', 'INF', 'm', 'Infraestruturas (ARQ 02) — elementos lineares/áreas identificados pela legenda', 'Inf')
 wa, ha, la = folha_familia('AVAC', 'AVAC', 'm', 'AVAC — comprimentos pelas linhas de eixo (layers *-CNTR), por sistema', 'Avac')
 
@@ -301,10 +353,12 @@ wsr['A1'].font = ft
 wsr['A2'] = 'Totais por descrição × piso. Fórmulas SUMIFS sobre os separadores de família (que por sua vez somam o Rastreio).'
 wsr['A2'].font = Font(name=F, size=9, italic=True)
 r = 4
-blocos_resumo = [('Pavimentos', 'PAV', 'm²', hp, lp), ('Tetos', 'TET', 'm²', ht, lt), ('Paredes', 'PAR', 'm', hpa, lpa),
-                 ('Infraestruturas', 'INF', None, hi, li), ('AVAC', 'AVAC', 'm', ha, la)]
-for nome, fam, un, h0, h1 in blocos_resumo:
-    c = wsr.cell(r, 1, f'{nome}'); c.font = Font(name=F, size=12, bold=True, color='1F3864')
+blocos_resumo = [('Pavimentos', 'PAV', 'G', hp, lp, 'Pavimentos'), ('Tetos', 'TET', 'G', ht, lt, 'Tetos'),
+                 ('Paredes', 'PAR', 'J', hpa, lpa, 'Paredes — área (m²) = desenvolvimento × altura do teto (sem dedução de vãos)'),
+                 ('Paredes', 'PAR', 'G', hpa, lpa, 'Paredes — desenvolvimento (m)'),
+                 ('Infraestruturas', 'INF', 'G', hi, li, 'Infraestruturas'), ('AVAC', 'AVAC', 'G', ha, la, 'AVAC')]
+for nome, fam, colq, h0, h1, titulo in blocos_resumo:
+    c = wsr.cell(r, 1, titulo); c.font = Font(name=F, size=12, bold=True, color='1F3864')
     r += 1
     hdrs = ['Descrição', 'Un'] + PISOS + ['Total']
     for i, t in enumerate(hdrs, 1):
@@ -316,12 +370,14 @@ for nome, fam, un, h0, h1 in blocos_resumo:
             descs.setdefault((inf['desc'], inf['un']), None)
     ini = r
     for (desc, u) in sorted(descs, key=lambda x: (x[1], x[0])):
+        if colq == 'J' and SO_METRO.search(desc):
+            continue
         wsr.cell(r, 1, desc).alignment = wrap
-        wsr.cell(r, 2, u)
+        wsr.cell(r, 2, 'm²' if colq == 'J' else u)
         for j, p in enumerate(PISOS):
             col = get_column_letter(3 + j)
             rng = f"'{nome}'!"
-            f = (f"=SUMIFS({rng}$G${h0+1}:$G${h1},{rng}$D${h0+1}:$D${h1},$A{r},{rng}$F${h0+1}:$F${h1},$B{r},"
+            f = (f"=SUMIFS({rng}${colq}${h0+1}:${colq}${h1},{rng}$D${h0+1}:$D${h1},$A{r},{rng}$F${h0+1}:$F${h1},\"{u}\","
                  f"{rng}$C${h0+1}:$C${h1},\"{p}*\")")
             wsr.cell(r, 3 + j, f).number_format = '#,##0.00;-#,##0.00;"-"'
         wsr.cell(r, 3 + len(PISOS), f'=SUM(C{r}:{get_column_letter(2+len(PISOS))}{r})').number_format = '#,##0.00;-#,##0.00;"-"'
@@ -395,8 +451,8 @@ OBS = [
     ('Coerência entre plantas', 'Piso 1: 1-02, 2-07, 3-02, 3-06, 3-11, 5-05', 'Beliches: 21 nas plantas geral/infra vs 24 nas de pavimentos/tetos/vãos; sanitas 14 vs 15; bases de duche 10 vs 11; armários 20–24; janelas 42–72 (vistas com recortes diferentes).', 'Indica plantas não atualizadas entre si — confirmar com o projetista qual a versão correta (impacta mobiliário, louças e vãos).'),
     ('Coerência entre plantas', 'Piso 2: 1-03, 2-08, 3-03, 3-07, 3-12, 5-06', 'Portas interiores: 65–66 nas plantas ARQ vs 56 na planta de vãos 5-06; beliches 44 vs 47; armários 11 vs 14; sanitas/duches/lavatórios +1 nas plantas de pavimento e tetos.', 'Mapa de vãos pode estar incompleto — validar contagem de portas antes de orçamentar.'),
     ('Coerência entre plantas', 'Piso 3: 1-04, 2-09, 3-04, 3-08, 3-13', 'Armários quarto: 9–13 conforme a planta; móveis lavatório 7 vs 8.', 'Confirmar quantidades de mobiliário fixo no piso 3.'),
-    ('AVAC', 'AVAC 201/202/204 (tubagem)', 'Linhas de eixo P-PIPE-CNTR a vermelho (#FF0000/#CC0000), ~23 m no total, sem item correspondente na legenda.', 'Pedir ao projetista AVAC a identificação deste sistema (possível rede de condensados).'),
-    ('Método', 'Paredes 3-05…3-09', 'Acabamentos de parede desenhados como linhas em planta: mede-se o desenvolvimento (m). Área = m × pé-direito (preencher no separador Paredes).', 'Validar pé-direito por piso (ver alturas de teto na legenda de tetos).'),
+    ('AVAC', 'AVAC 201/202/204 (tubagem)', 'Linhas de eixo P-PIPE-CNTR a vermelho (#FF0000/#CC0000), ~45 m no total, sem item correspondente na legenda.', 'Pedir ao projetista AVAC a identificação deste sistema (possível rede de condensados).'),
+    ('Método', 'Paredes 3-05…3-09', 'Acabamentos de parede desenhados como linhas em planta: mede-se o desenvolvimento (m); área = m × altura do teto do compartimento (legenda dos tetos). Piso 0: grande parte dos tetos é "PINTURA SOBRE SUPORTE EXISTENTE", sem altura na legenda.', 'Preencher as alturas em falta no separador "Alturas tetos" (amarelo). Áreas sem dedução de vãos.'),
 ]
 for i, (tp, ds, de, ac) in enumerate(OBS, 1):
     for j, v in enumerate([i, tp, ds, de, ac, None], 1):
@@ -481,16 +537,16 @@ L = [
     ('6. Separadores de família somam o Rastreio (SUMIFS/COUNTIFS); o Resumo soma os separadores de família por piso.', fnt),
     ('', fnt),
     ('Separadores', fb),
-    ('Resumo · Pavimentos · Tetos · Paredes · Infraestruturas · AVAC · Blocos · Sem legenda · Verificações · Ficheiros · Rastreio', fnt),
+    ('Resumo · Pavimentos · Tetos · Paredes · Alturas tetos · Infraestruturas · AVAC · Blocos · Sem legenda · Verificações · Ficheiros · Rastreio', fnt),
     ('', fnt),
     ('Convenções de cor', fb),
     ('Texto azul = dado extraído do CAD / valor de entrada · Texto verde = ligação a outro separador · Texto preto = fórmula', fnt),
-    ('Fundo amarelo = célula a preencher pelo utilizador (pé-direito, decisões, estado) · Fundo salmão = quantidade 0 ou ficheiro não processado', fnt),
+    ('Fundo amarelo = célula a preencher pelo utilizador (alturas em falta, decisões, estado) · Fundo salmão = quantidade 0 ou ficheiro não processado', fnt),
     ('Match: "chave" = igual à amostra da legenda · "cor" = só a cor coincide (cor única na legenda) → validar · "cor*" = cor da legenda de outro desenho AVAC · "layer" = eixo AVAC sem legenda · "bloco" = contagem de blocos · "?" = legenda de infraestruturas pouco fiável', fnt),
     ('', fnt),
     ('Limitações', fb),
     ('• Mede o que está desenhado: hatches sobrepostos, zonas não hachuradas ou elementos fora de escala não são corrigidos automaticamente.', fnt),
-    ('• Paredes: mede-se o desenvolvimento em planta (m). A área exige o pé-direito (amarelo no separador Paredes; 2,70 m é apenas exemplo).', fnt),
+    ('• Paredes: desenvolvimento em planta (m) × altura do teto do compartimento (legenda dos tetos, separador "Alturas tetos"). Sem dedução de vãos. Rodapés/espelhos só em m.', fnt),
     ('• AVAC: comprimento pelas linhas de eixo (*-CNTR). Diâmetros/secções não desagregados nesta versão. Pisos 1–3 de condutas não processados (ficheiros > 5 MB).', fnt),
     ('• Infraestruturas: contagens por família de bloco no separador Blocos (ex.: INFRA-tomada); linhas da legenda no separador Infraestruturas.', fnt),
     ('• Atribuição de pisos assumida a partir do nome das vistas Revit (ex.: "03_ACAB PAV - piso 1"). 1-01 e 2-06 (sem nome de vista) assumidos como Piso 0.', fnt),
